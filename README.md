@@ -26,7 +26,7 @@ Just open **PowerShell (not as Administrator)** and run:
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 ./windows-dev-env-setup-with-scoop.ps1
-
+```
 
 🧑‍💻 Development Tools
 | Software                        | What It’s Used For                                                                  |
