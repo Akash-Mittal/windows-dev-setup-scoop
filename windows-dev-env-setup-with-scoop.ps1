@@ -1,6 +1,3 @@
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-# Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-# run this file twice becouse buckets need git
 function Ensure-ScoopPackage {
     param([Parameter(Mandatory = $true)][string]$Name)
 
@@ -9,7 +6,7 @@ function Ensure-ScoopPackage {
         Write-Host "Installing $Name ..."
         scoop install $Name
     } else {
-        Write-Host "$Name is already installed. Skipping installation."
+        Write-Host "$Name is already installed. Skipping."
     }
 }
 
@@ -25,42 +22,47 @@ function Ensure-ScoopBucket {
     }
 }
 
-Ensure-ScoopBucket -Name "main"
-Ensure-ScoopBucket -Name "extras"
-Ensure-ScoopBucket -Name "versions"
-Ensure-ScoopBucket -Name "java"
+Ensure-ScoopBucket "main"
+Ensure-ScoopBucket "extras"
+Ensure-ScoopBucket "versions"
+Ensure-ScoopBucket "java"
 
-Ensure-ScoopPackage -Name "git"
-Ensure-ScoopPackage -Name "openjdk21"
-Ensure-ScoopPackage -Name "maven"
-Ensure-ScoopPackage -Name "nodejs-lts"
-Ensure-ScoopPackage -Name "nvm"
-Ensure-ScoopPackage -Name "idea-ultimate"
-Ensure-ScoopPackage -Name "gcloud"
+Ensure-ScoopPackage "git"
+Ensure-ScoopPackage "openjdk21"
+Ensure-ScoopPackage "maven"
+Ensure-ScoopPackage "nodejs-lts"
+Ensure-ScoopPackage "nvm"
+Ensure-ScoopPackage "idea-ultimate"
+Ensure-ScoopPackage "gcloud"
 
-Ensure-ScoopPackage -Name "yarn"
-Ensure-ScoopPackage -Name "mongodb-database-tools"
-Ensure-ScoopPackage -Name "mongosh"
-Ensure-ScoopPackage -Name "postman"
-Ensure-ScoopPackage -Name "jmeter"
-Ensure-ScoopPackage -Name "insomnia"
+Ensure-ScoopPackage "yarn"
+Ensure-ScoopPackage "mongodb-database-tools"
+Ensure-ScoopPackage "mongosh"
+Ensure-ScoopPackage "mongodb-compass"
 
-Ensure-ScoopPackage -Name "gh"
-Ensure-ScoopPackage -Name "filezilla"
-Ensure-ScoopPackage -Name "cloudflared"
-Ensure-ScoopPackage -Name "terraform"
-Ensure-ScoopPackage -Name "autohotkey"
+Ensure-ScoopPackage "postman"
+Ensure-ScoopPackage "jmeter"
+Ensure-ScoopPackage "insomnia"
 
-Ensure-ScoopPackage -Name "openshot"
-Ensure-ScoopPackage -Name "googlechrome"
-Ensure-ScoopPackage -Name "chatgpt"
-Ensure-ScoopPackage -Name "7zip"
-Ensure-ScoopPackage -Name "zoom"
-Ensure-ScoopPackage -Name "vlc"
-Ensure-ScoopPackage -Name "libreoffice"
-Ensure-ScoopPackage -Name "mongodb-compass"
+Ensure-ScoopPackage "gh"
+Ensure-ScoopPackage "filezilla"
+Ensure-ScoopPackage "cloudflared"
+Ensure-ScoopPackage "terraform"
+Ensure-ScoopPackage "autohotkey"
 
+Ensure-ScoopPackage "openshot"
+Ensure-ScoopPackage "googlechrome"
+Ensure-ScoopPackage "chatgpt"
+Ensure-ScoopPackage "7zip"
+Ensure-ScoopPackage "zoom"
+Ensure-ScoopPackage "vlc"
+# Libra office is very heavy install, uncomment in case you really want it.
+# Ensure-ScoopPackage "libreoffice"
 
-winget install --id Docker.DockerDesktop -e
-winget install --id 9NBDXK71NK08
+Ensure-ScoopPackage "rainmeter"
+Ensure-ScoopPackage "nosleep"
+Ensure-ScoopPackage "sudo"
+Ensure-ScoopPackage "notepadplusplus"
 
+winget install -e --id Docker.DockerDesktop
+winget install -e --id 9NBDXK71NK08
