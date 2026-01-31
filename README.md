@@ -1,85 +1,32 @@
-Windows Dev Setup with Scoop 🪄 (or: Because Windows Deserves Better)
+# Windows Dev Setup with Scoop 🪄  
+*(or: Because Windows Deserves Better)*
 
-Welcome to the script that magically equips your Windows PC with developer tools using Scoop — the package manager that tries to keep popup dialogs and admin nags to a minimum. It’s like chocolate for your terminal — sweet, but way less messy than Chocolatey 🍫.
+Welcome to the script that magically equips your Windows PC with developer tools using **Scoop** — the package manager that tries to keep popup dialogs and admin nags to a minimum. It’s like chocolate for your terminal — sweet, but way less messy than Chocolatey 🍫.
 
-This PowerShell script automates your Windows dev environment setup using Scoop (which is like Homebrew for Windows nerds) — installing things you probably need, and configures stuff so you don’t have to say “How do I install this again?” ever.
+This PowerShell script automates your Windows dev environment setup using Scoop (which is like Homebrew for Windows nerds) — installing things you probably need and configuring stuff so you don’t have to say **“How do I install this again?”** ever.
 
-🛠️ What It Does
+---
 
-Installs Scoop if it’s not already present.
+## 🛠️ What It Does
 
-Adds useful buckets (because “main” isn’t enough).
+- Installs Scoop if it’s not already present  
+- Adds useful buckets (because `"main"` isn’t enough)  
+- Installs a bunch of developer tools and utilities  
+- Optionally does some environmental tweaks  
+- Makes you wonder why you ever manually installed anything ever again  
 
-Installs a bunch of developer tools and utilities.
+📌 **Hint:** Scoop installs everything into your user folder and tries hard not to bother you with UAC prompts — it’s nice like that.
 
-Optionally does some environmental tweaks.
+---
 
-Makes you wonder why you ever manually installed anything ever again.
+## 🚀 Quick Setup
 
-📌 Hint: Scoop installs everything into your user folder and tries hard not to bother you with UAC prompts — it’s nice like that.
+Just open **PowerShell (not as Administrator)** and run:
 
-🚀 Quick Setup
-
-Just open PowerShell (not as Administrator) and run:
-
+```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 ./windows-dev-env-setup-with-scoop.ps1
 
-
-…and then go make a coffee ☕. This script does the heavy lifting.
-
-Pro tip: If PowerShell complains about permissions, just whisper sweet nothings to it and ensure your execution policy allows running local scripts. 😉
-
-📦 What Gets Installed
-
-Because every dev setup is slightly different, the script doesn’t promise you’ll end up with superpowers — but it does get you most of the essentials 😎:
-
-CLI tools (git, curl, grep, stuff like that)
-
-Common languages (Python, Node, etc.)
-
-Utilities you always forget you needed until the second cup of coffee
-
-(Exact list depends on what’s in the script — read the code if you’re curious or want to argue with it.)
-
-❓ Why Scoop?
-
-Because it’s awesome at being simple:
-
-no admin rights for most packages
-
-no GUI wizards popping up in your face
-
-keeps your PATH sane — unlike that one other package manager you tried once
-
-repeatable setup so your dev machines look almost identical.
-
-If you were to describe Scoop in human terms:
-
-“It’s like apt, but for Windows, and it doesn’t judge you.” 😄
-
-🧠 Troubleshooting Tips
-
-Q: “Why is PowerShell yelling at me?”
-A: Because Windows likes to make you feel alive. Just set the execution policy and try again.
-
-Q: “Why didn’t it install VS Code for me?”
-A: Scoop might not include it in the buckets you added — either add the correct bucket or install manually.
-
-Q: “Why is my terminal still sad?”
-A: Install Windows Terminal/apple a positive mindset.
-
-⭐ Contribution
-
-Feel like adding more packages? Updating the install list? Or just want to criticize the use of puns in this README? Pull requests are welcome!
-
-📜 License
-
-It’s basically just a bunch of PowerShell with a sprinkle of developer dreams. Use it, fork it, roast it.
-
-Thanks for stopping by! May your installs be smooth and your dev environment glorious 🧙‍♂️✨.
-
-If you want, I can tailor this to match the exact packages and steps in your script — just paste the code!
 
 🧑‍💻 Development Tools
 | Software                        | What It’s Used For                                                                  |
