@@ -1,0 +1,39 @@
+services:
+  xcp-local-mongo-database-service:
+    image: mongo:8
+    container_name: xcp-local-mongo-database-container
+    command: [ "bash", "/scripts/config-mongo-db-container.sh" ]
+    ports:
+      - "27017:27017"
+      - "27018:27018"
+      - "27019:27019"
+    volumes:
+      - xcp_local_mongo_rs0_1:/data/rs0-1
+      - xcp_local_mongo_rs0_2:/data/rs0-2
+      - xcp_local_mongo_rs0_3:/data/rs0-3
+      - ./config-mongo-db-container.sh:/scripts/config-mongo-db-container.sh:ro
+    networks:
+      - xcp-local-net
+
+  xcp-local-activemq-service:
+    image: quay.io/artemiscloud/activemq-artemis-broker:latest
+    container_name: xcp-local-activemq-container
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+      - "5672:5672"
+    environment:
+      - AMQ_USER=quarkus
+      - AMQ_PASSWORD=quarkus
+      - AMQ_ALLOW_ANONYMOUS=true
+    networks:
+      - xcp-local-net
+
+volumes:
+  xcp_local_mongo_rs0_1:
+  xcp_local_mongo_rs0_2:
+  xcp_local_mongo_rs0_3:
+
+networks:
+  xcp-local-net:
+    driver: bridge
