@@ -1,4 +1,4 @@
-# . "$PSScriptRoot\scoop\windows-dev-env-setup-with-scoop.ps1"
+ # . "$PSScriptRoot\scoop\windows-dev-env-setup-with-scoop.ps1"
 
 $chromeBatFolder = Join-Path $PSScriptRoot "chrome"
 $startupFolder = [Environment]::GetFolderPath("Startup")
@@ -28,7 +28,8 @@ $startupItems = @(
     @{ Name = "Google Drive"; Path = "C:\Program Files\Google\Drive\GoogleDrive.exe" },
     @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\clear-cache.bat" },
     @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker-compose.bat" },
-    @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\gitupdateandbuild.bat" }
+    @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\gitupdateandbuild.bat" },
+    @{ Name = "Scoop Update"; Path = Join-Path $PSScriptRoot "scoop\sccop.update.bat" }
 )
 
 foreach ($item in $startupItems) {
