@@ -1,3 +1,17 @@
+# Requires administrator privileges to run
+# This script will attempt to elevate itself if not already running as administrator.
+
+# Check for Administrator privileges
+if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Attempting to elevate script to Administrator privileges..."
+    Start-Process PowerShell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`""
+    Exit
+}
+
+# Set execution policy for the current session to allow scripts to run
+Set-ExecutionPolicy Bypass -Scope Process -Force
+
+Write-Host "Running defualt-file-extension.notepad.ps1 with Administrator privileges."
 
 $extensions = @(
     ".txt",".log",".cfg",".conf",".ini",".env",".properties",
@@ -36,21 +50,21 @@ $extensions = @(
 $notepadpp = "$env:USERPROFILE\scoop\apps\notepadplusplus\current\notepad++.exe"
 
 if (-not (Test-Path $notepadpp)) {
-    throw "Notepad++ not found at: $notepadpp"
-}
-
-if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    throw "Run this PowerShell as Administrator."
+    Write-Error "Notepad++ not found at: $notepadpp. Cannot set file associations."
+    Exit 1
 }
 
 $extList = $extensions | Where-Object { $_ -and $_.StartsWith(".") } | ForEach-Object { $_.ToLowerInvariant() } | Sort-Object -Unique
 
+Write-Host "Setting file type for NotepadPP.File..."
 $ftypeCmd = "ftype NotepadPP.File=`"$notepadpp`" `"%1`""
 cmd /c $ftypeCmd | Out-Null
 
+Write-Host "Associating extensions with Notepad++..."
 foreach ($ext in $extList) {
     $assocCmd = "assoc $ext=NotepadPP.File"
     cmd /c $assocCmd | Out-Null
 }
 
+Write-Host "File associations with Notepad++ completed."
 cmd /c "ftype NotepadPP.File"

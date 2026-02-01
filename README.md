@@ -11,7 +11,7 @@ The repository is organized into folders, each containing scripts or configurati
 The `fire.ps1` script is the main entry point for setting up the development environment. It performs the following tasks:
 
 *   Runs the `windows-dev-env-setup-with-scoop.ps1` script to install a wide range of development tools and applications using Scoop and winget.
-*   Creates shortcuts in the Windows Startup folder for various applications and scripts, including:
+*   Directly starts various applications and scripts, including:
     *   Rainmeter
     *   IntelliJ IDEA Ultimate
     *   Notepad++
@@ -22,9 +22,10 @@ The `fire.ps1` script is the main entry point for setting up the development env
     *   `clear-cache.bat`
     *   `start-docker-compose.bat`
     *   `gitupdateandbuild.bat`
-    *   `sccop.update.bat`
+    *   `sccop.update.ps1`
 *   Copies the Rainmeter skins to the appropriate directory.
-*   Creates shortcuts for Chrome startup scripts.
+*   Starts all Chrome startup scripts.
+*   **Processes GitHub Repositories**: If the `GIT_REPO_HOME` environment variable is set and points to a valid directory, the script iterates through each sub-directory (assumed to be a Git repository) and executes `gitupdateandbuild.bat` within each repository's context.
 
 ## Folders
 
@@ -40,7 +41,7 @@ The `fire.ps1` script is the main entry point for setting up the development env
 
 *   [**intellij**](./intellij/README.md): Contains IntelliJ IDEA configuration files, including code style, inspection profiles, and Detekt settings.
 
-*   [**misc**](./misc/README.md): Contains a PowerShell script to set Notepad++ as the default application for various file extensions.
+*   [**misc**](notepad/README.md): Contains a PowerShell script to set Notepad++ as the default application for various file extensions.
 
 *   [**rainmeter**](./rainmeter/README.md): Contains skins for the Rainmeter desktop customization tool, including clocks and a reminder.
 
