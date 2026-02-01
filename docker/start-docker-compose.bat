@@ -1,5 +1,4 @@
-git pull
-git fetch
+
 set "WORK_DIR=%~1"
 cd /d "%WORK_DIR%"
 docker compose down --remove-orphans

@@ -1,38 +1,44 @@
-# ============================================================
-# fire.ps1 - Main setup script
-# ============================================================
+# . "$PSScriptRoot\scoop\windows-dev-env-setup-with-scoop.ps1"
 
-# Dot-source your main setup script (runs in current scope)
-# . "$PSScriptRoot\windows-dev-setup-scoop\windows-dev-env-setup-with-scoop.ps1"
-
-# ============================================================
-# Copy Chrome startup BAT files to Windows Startup folder
-# ============================================================
-
-# Source folder (relative to this script)
-$chromeBatFolder = Join-Path $PSScriptRoot "chrome-default-startup"
-
-# User Startup folder (dynamic)
+$chromeBatFolder = Join-Path $PSScriptRoot "chrome"
 $startupFolder = [Environment]::GetFolderPath("Startup")
+$wshell = New-Object -ComObject WScript.Shell
 
-# Copy all .bat files to Startup folder
 Get-ChildItem "$chromeBatFolder\*.bat" | ForEach-Object {
-    Copy-Item $_.FullName -Destination $startupFolder -Force
+    $shortcutPath = Join-Path $startupFolder "$($_.BaseName).lnk"
+    $shortcut = $wshell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = $_.FullName
+    $shortcut.Save()
 }
+Write-Host "Chrome startup scripts shortcuts created successfully!"
 
-Write-Host "Chrome startup scripts copied successfully!"
-
-# ============================================================
-# Copy Rainmeter automation folder to Scoop Rainmeter Skins
-# ============================================================
-
-# Source folder (relative to this script)
-$rainmeterFolder = Join-Path $PSScriptRoot "rainmeter-automation"
-
-# Destination folder in Scoop Rainmeter Skins (dynamic using user profile)
-$rainmeterScoopFolder = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\Skins\rainmeter-automation"
-
-# Copy the entire folder recursively
+$rainmeterFolder = Join-Path $PSScriptRoot "rainmeter"
+$rainmeterScoopFolder = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\Skins\rainmeter"
 Copy-Item -Path $rainmeterFolder -Destination $rainmeterScoopFolder -Recurse -Force
+Write-Host "rainmeter folder copied to Rainmeter Scoop Skins successfully!"
 
-Write-Host "rainmeter-automation folder copied to Rainmeter Scoop Skins successfully!"
+# Create shortcuts in Startup folder
+$startupItems = @(
+    @{ Name = "Rainmeter"; Path = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\rainmeter.exe" },
+    @{ Name = "IntelliJ IDEA Ultimate"; Path = Join-Path $env:USERPROFILE "scoop\apps\idea-ultimate\current\IDE\bin\idea64.exe" },
+    @{ Name = "Notepad++"; Path = Join-Path $env:USERPROFILE "scoop\apps\notepadplusplus\current\notepad++.exe" },
+    @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe" },
+    @{ Name = "ChatGPT"; Path = Join-Path $env:USERPROFILE "scoop\apps\chatgpt\current\ChatGPT.exe" },
+    @{ Name = "NoSleep"; Path = Join-Path $env:USERPROFILE "scoop\apps\nosleep\current\NoSleep.exe" },
+    @{ Name = "Google Drive"; Path = "C:\Program Files\Google\Drive\GoogleDrive.exe" },
+    @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\clear-cache.bat" },
+    @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker-compose.bat" },
+    @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\gitupdateandbuild.bat" }
+)
+
+foreach ($item in $startupItems) {
+    if (Test-Path $item.Path) {
+        $shortcutPath = Join-Path $startupFolder "$($item.Name).lnk"
+        $shortcut = $wshell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = $item.Path
+        $shortcut.Save()
+        Write-Host "$($item.Name) shortcut created in Startup folder."
+    } else {
+        Write-Warning "$($item.Name) not found at $($item.Path). Shortcut not created."
+    }
+}
