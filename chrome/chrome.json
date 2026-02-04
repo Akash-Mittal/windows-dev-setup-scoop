@@ -32,12 +32,7 @@
       "profileDirectory": "nica",
       "runOnStartup": {
         "urls": [
-          "https://calendar.google.com/calendar/u/0/r",
-          "https://mail.google.com/mail/u/0/#inbox",
-          "https://mail.google.com/mail/u/1/#inbox",
-          "https://translate.google.com/?sl=es&tl=en&op=translate",
-          "https://www.google.com/maps",
-          "https://www.idealista.com/en/usuario/tus-alertas"
+          "https://nicaindia.wordpress.com/"
         ]
       }
     },
