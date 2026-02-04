@@ -78,5 +78,5 @@ Ensure-ScoopPackage "vscode"
 # These packages are not availablle with scoop
 winget install -e --id Docker.DockerDesktop
 # whatspp beta
-winget install -e --id 9NBDXK71NK08
-winget install Google.Drive
+# winget install -e --id 9NBDXK71NK08
+# winget install Google.Drive

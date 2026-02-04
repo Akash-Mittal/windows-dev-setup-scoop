@@ -18,6 +18,14 @@ The `vpn-login.ahk` script automates the process of logging into the Cisco Secur
 2.  The script will automatically attempt to log in to the VPN 5 seconds after it starts.
 3.  You can also trigger the login manually by pressing `Ctrl+Alt+C`.
 
+### How to run
+
+To run the `vpn-login.ahk` script:
+
+1.  Ensure AutoHotkey v2.0 is installed.
+2.  Simply double-click the `vpn-login.ahk` file.
+3.  The script will start and attempt to log in to the VPN after 5 seconds. You can also manually trigger the login by pressing `Ctrl+Alt+C`.
+
 ### How it Works
 
 The script performs the following actions:

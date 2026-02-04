@@ -1,0 +1,18 @@
+{
+  "github": {
+    "repos": [
+      {
+        "path": "C:\\Users\\mittala\\github\\work\\xcp-posting-clean-main-branch\\xcp-posting",
+        "buildCommand": "mvn clean package -o -T 1C -Denv=release"
+      },
+      {
+        "path": "C:\\Users\\mittala\\github\\work\\terraform-enterprise-orchestrator",
+        "buildCommand": ""
+      },
+      {
+        "path": "C:\\Users\\mittala\\github\\work\\terraform-clp-crosschannel-posting",
+        "buildCommand": ""
+      }
+    ]
+  }
+}

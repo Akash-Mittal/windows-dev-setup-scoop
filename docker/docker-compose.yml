@@ -1,23 +1,23 @@
 services:
-  xcp-local-mongo-database-service:
+  trump-local-mongo-database-service:
     image: mongo:8
-    container_name: xcp-local-mongo-database-container
-    command: [ "bash", "/scripts/config-mongo-db-container.sh" ]
+    container_name: trump-local-mongo-database-container
+    command: ["bash", "/scripts/config-mongo-db-container.sh"]
     ports:
       - "27017:27017"
       - "27018:27018"
       - "27019:27019"
     volumes:
-      - xcp_local_mongo_rs0_1:/data/rs0-1
-      - xcp_local_mongo_rs0_2:/data/rs0-2
-      - xcp_local_mongo_rs0_3:/data/rs0-3
-      - ./config-mongo-db-container.sh:/scripts/config-mongo-db-container.sh:ro
+      - trump_local_mongo_rs0_1:/data/rs0-1
+      - trump_local_mongo_rs0_2:/data/rs0-2
+      - trump_local_mongo_rs0_3:/data/rs0-3
+      - ./scripts:/scripts:ro
     networks:
-      - xcp-local-net
+      - trump-local-networks
 
-  xcp-local-activemq-service:
+  trump-local-activemq-service:
     image: quay.io/artemiscloud/activemq-artemis-broker:latest
-    container_name: xcp-local-activemq-container
+    container_name: trump-local-activemq-container
     ports:
       - "8161:8161"
       - "61616:61616"
@@ -27,13 +27,33 @@ services:
       - AMQ_PASSWORD=quarkus
       - AMQ_ALLOW_ANONYMOUS=true
     networks:
-      - xcp-local-net
+      - trump-local-networks
+
+  trump-local-mysql-service:
+    image: mysql:8.4
+    container_name: trump-local-mysql-container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trump_local
+      MYSQL_USER: trump
+      MYSQL_PASSWORD: trump
+    volumes:
+      - trump_local_mysql_data:/var/lib/mysql
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    networks:
+      - trump-local-networks
 
 volumes:
-  xcp_local_mongo_rs0_1:
-  xcp_local_mongo_rs0_2:
-  xcp_local_mongo_rs0_3:
+  trump_local_mongo_rs0_1:
+  trump_local_mongo_rs0_2:
+  trump_local_mongo_rs0_3:
+  trump_local_mysql_data:
 
 networks:
-  xcp-local-net:
+  trump-local-networks:
     driver: bridge

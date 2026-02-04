@@ -16,16 +16,23 @@ The `fire.ps1` script is the main entry point for setting up the development env
     *   IntelliJ IDEA Ultimate
     *   Notepad++
     *   Docker Desktop
-    *   ChatGPT
     *   NoSleep
-    *   Google Drive
-    *   `clear-cache.bat`
-    *   `start-docker-compose.bat`
-    *   `gitupdateandbuild.bat`
+    *   `clear-cache.ps1`
+    *   `start-docker-compose.ps1`
+    *   `gitupdateandbuild.ps1`
     *   `sccop.update.ps1`
+    *   `chrome-open-profiles.ps1`
+    *   `vpn-login.ahk`
 *   Copies the Rainmeter skins to the appropriate directory.
-*   Starts all Chrome startup scripts.
-*   **Processes GitHub Repositories**: If the `GIT_REPO_HOME` environment variable is set and points to a valid directory, the script iterates through each sub-directory (assumed to be a Git repository) and executes `gitupdateandbuild.bat` within each repository's context.
+*   **Processes GitHub Repositories**: If the `GIT_REPO_HOME` environment variable is set and points to a valid directory, the script iterates through each sub-directory (assumed to be a Git repository) and executes `gitupdateandbuild.ps1` within each repository's context.
+
+### How to run
+
+To run the `fire.ps1` script, open a PowerShell terminal, navigate to the root of this repository, and execute:
+
+```powershell
+.\fire.ps1
+```
 
 ## Folders
 

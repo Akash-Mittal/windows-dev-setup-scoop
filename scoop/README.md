@@ -21,6 +21,26 @@ This folder contains a PowerShell script to automate the setup of a Windows deve
 2.  Navigate to this folder.
 3.  Run the `windows-dev-env-setup-with-scoop.ps1` script.
 
+### How to run
+
+To run the `windows-dev-env-setup-with-scoop.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
+
+```powershell
+.\windows-dev-env-setup-with-scoop.ps1
+```
+
+To run the `sccop.update.bat` script, open a Command Prompt or PowerShell terminal, navigate to this directory, and execute:
+
+```cmd
+sccop.update.bat
+```
+
+To run the `sccop.update.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
+
+```powershell
+.\sccop.update.ps1
+```
+
 ### What it Installs
 
 The script will install the following software using Scoop:

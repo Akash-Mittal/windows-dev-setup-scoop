@@ -1,0 +1,74 @@
+{
+  "profiles": {
+    "personal": {
+      "profileDirectory": "personal",
+      "runOnStartup": {
+        "urls": [
+          "https://calendar.google.com/calendar/u/0/r",
+          "https://mail.google.com/mail/u/0/#inbox",
+          "https://mail.google.com/mail/u/1/#inbox",
+          "https://translate.google.com/?sl=es&tl=en&op=translate",
+          "https://www.google.com/maps",
+          "https://www.idealista.com/en/usuario/tus-alertas"
+        ]
+      }
+    },
+
+    "work": {
+      "profileDirectory": "work",
+      "runOnStartup": {
+        "urls": [
+          "https://confluence.media-saturn.com/spaces/~mittala/overview",
+          "https://jira.media-saturn.com/secure/RapidBoard.jspa?rapidView=4538#",
+          "https://console.cloud.google.com/run/overview?project=mms-xcp-xcp-p",
+          "https://github.com/MediaMarktSaturn/xcp-posting",
+          "https://cloud.mongodb.com/v2/632db29faf84ef7bf684e4ab#/clusters",
+          "https://xcp-prod-frontend-swzlilrgcq-ez.a.run.app/"
+        ]
+      }
+    },
+
+    "nica": {
+      "profileDirectory": "nica",
+      "runOnStartup": {
+        "urls": [
+          "https://calendar.google.com/calendar/u/0/r",
+          "https://mail.google.com/mail/u/0/#inbox",
+          "https://mail.google.com/mail/u/1/#inbox",
+          "https://translate.google.com/?sl=es&tl=en&op=translate",
+          "https://www.google.com/maps",
+          "https://www.idealista.com/en/usuario/tus-alertas"
+        ]
+      }
+    },
+
+    "blog": {
+      "profileDirectory": "blog",
+      "runOnStartup": {
+        "urls": [
+          "https://my.bluehost.in/hosting/app?lil=1#/",
+          "https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/filemanager/index.html",
+          "https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/index.html",
+          "https://wordpress.com/sites/brainprintout.wordpress.com",
+          "https://brainprintout.wordpress.com/",
+          "https://nicaindia.wordpress.com/"
+        ]
+      }
+    },
+
+    "finance": {
+      "profileDirectory": "finance",
+      "runOnStartup": {
+        "urls": [
+          "https://netbanking.hdfcbank.com/netbanking/",
+          "https://retailnetbanking.icici.bank.in/login-page",
+          "https://kunden.commerzbank.de/startpage/startpage",
+          "https://meine.deutsche-bank.de/#/banking/financial-overview",
+          "https://particulares.bancosantander.es/oneweb/global-position",
+          "https://app.n26.com/feed",
+          "https://app.revolut.com/home"
+        ]
+      }
+    }
+  }
+}

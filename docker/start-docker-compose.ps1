@@ -1,19 +1,20 @@
-# PowerShell script to start Docker Compose environment.
-
 param(
-    [string]$WorkingDirectory = (Get-Location).Path
+    [string]$WorkingDirectory = (Get-Location).Path,
+    [switch]$ResetData
 )
 
-Write-Host "Changing directory to: $WorkingDirectory"
+$ErrorActionPreference = "Stop"
+
 Set-Location $WorkingDirectory -ErrorAction Stop
 
-Write-Host "Bringing down existing Docker Compose services and removing orphans..."
-docker compose down --remove-orphans
-
-Write-Host "Removing any existing containers with conflicting names..."
-docker rm -f xcp-local-mongo-database-container -ErrorAction SilentlyContinue
-docker rm -f xcp-local-activemq -ErrorAction SilentlyContinue
-docker rm -f xcp-local-frontend -ErrorAction SilentlyContinue
+Write-Host "Stopping Docker Compose services..."
+if ($ResetData) {
+    Write-Host "ResetData enabled: removing containers + networks + volumes (DATA WILL BE LOST)."
+    docker compose down --remove-orphans --volumes
+} else {
+    Write-Host "Preserving data: removing containers + networks only (volumes kept)."
+    docker compose down --remove-orphans
+}
 
 Write-Host "Starting Docker Compose services..."
 docker compose up --build -d

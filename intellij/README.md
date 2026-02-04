@@ -17,3 +17,7 @@ To use these configuration files:
 2.  **Inspections**: Go to `File > Settings > Editor > Inspections`, click the gear icon, and select `Import Profile...`. Select the `inspection-settings.xml` file.
 3.  **Detekt**: The `detekt.yml` file is used by the Detekt tool. Refer to the Detekt documentation for instructions on how to integrate it with your build process.
 4.  **Settings**: To import the settings from `settings.zip`, go to `File > Manage IDE Settings > Import Settings...` and select the `settings.zip` file.
+
+### How to run
+
+These files are configuration files and are not meant to be "run" in the traditional sense. They are imported or used by IntelliJ IDEA. Please refer to the "Usage" section above for instructions on how to apply these configurations.

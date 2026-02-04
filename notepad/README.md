@@ -17,6 +17,14 @@ The `defualt-file-extension.notepad.ps1` script sets Notepad++ as the default ap
 2.  Navigate to this folder.
 3.  Run the `defualt-file-extension.notepad.ps1` script.
 
+### How to run
+
+To run the `defualt-file-extension.notepad.ps1` script, open a PowerShell terminal with administrator privileges, navigate to this directory, and execute:
+
+```powershell
+.\defualt-file-extension.notepad.ps1
+```
+
 ### How it Works
 
 The script iterates through a predefined list of file extensions and uses the `assoc` and `ftype` commands to associate them with Notepad++.

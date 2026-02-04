@@ -19,6 +19,14 @@ This folder contains the necessary files to set up a local development environme
     *   Remove any containers with conflicting names.
     *   Start the services in detached mode.
 
+## How to run
+
+To run the `start-docker-compose.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
+
+```powershell
+.\start-docker-compose.ps1
+```
+
 ## Services
 
 *   **MongoDB**: A MongoDB replica set with three nodes, accessible on ports `27017`, `27018`, and `27019`.
