@@ -20,3 +20,5 @@ Write-Host "Starting Docker Compose services..."
 docker compose up --build -d
 
 Write-Host "Docker Compose environment started."
+
+Read-Host "Press Enter to exit..."

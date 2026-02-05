@@ -80,3 +80,5 @@ try {
     Write-Error $_
     exit 1
 }
+
+Read-Host "Press Enter to exit..."

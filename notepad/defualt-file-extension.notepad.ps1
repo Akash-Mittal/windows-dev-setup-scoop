@@ -79,3 +79,5 @@ if (Test-Path $notepadAssocScript) {
 } else {
     Write-Warning "Notepad++ file association script not found at '$notepadAssocScript'. Skipping file associations."
 }
+
+Read-Host "Press Enter to exit..."

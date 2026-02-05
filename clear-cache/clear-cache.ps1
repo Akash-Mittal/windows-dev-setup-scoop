@@ -18,3 +18,5 @@ Remove-Item "$env:LOCALAPPDATA\Microsoft\Windows\SoftwareDistribution\Download\*
 Remove-Item "$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force
 Remove-Item "$env:APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*" -Recurse -Force
 Remove-Item "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations\*" -Recurse -Force
+
+Read-Host "Press Enter to exit..."

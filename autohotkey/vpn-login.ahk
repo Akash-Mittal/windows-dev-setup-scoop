@@ -68,3 +68,5 @@ SetTimer(RunVpnFlow, -5000)
 
 ; optional manual trigger
 ^!c:: RunVpnFlow()
+
+Read-Host "Press Enter to exit..."

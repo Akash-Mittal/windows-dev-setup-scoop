@@ -152,4 +152,4 @@ if ($anyFailed) {
 }
 
 Write-DebugLog "All repositories updated and built successfully."
-exit 0
+Read-Host "Press Enter to exit..."
