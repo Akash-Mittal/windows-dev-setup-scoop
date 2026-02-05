@@ -10,7 +10,7 @@ PWD_X := 120
 PWD_Y := 76
 
 RunVpnFlow(*) {
-    password := EnvGet("MITTALA_WINDOWS_PASSWORD")
+    password := EnvGet("WINDOWS_PASSWORD")
     if (password = "")
         return
 
