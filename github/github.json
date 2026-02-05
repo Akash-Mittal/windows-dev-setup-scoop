@@ -2,15 +2,23 @@
   "github": {
     "repos": [
       {
-        "path": "C:\\Users\\mittala\\github\\work\\xcp-posting-clean-main-branch\\xcp-posting",
+        "path": "github\\work\\xcp-posting-clean-main-branch\\xcp-posting",
         "buildCommand": "mvn clean package -o -T 1C -Denv=release"
       },
       {
-        "path": "C:\\Users\\mittala\\github\\work\\terraform-enterprise-orchestrator",
+        "path": "github\\work\\xcp-posting-clean-trump-branch\\xcp-posting",
+        "buildCommand": "mvn clean package -o -T 1C -Denv=release"
+      },
+      {
+        "path": "github\\work\\terraform-enterprise-orchestrator",
         "buildCommand": ""
       },
       {
-        "path": "C:\\Users\\mittala\\github\\work\\terraform-clp-crosschannel-posting",
+        "path": "github\\work\\terraform-clp-crosschannel-posting",
+        "buildCommand": ""
+      },
+      {
+        "path": "github\\personal\\windows-dev-setup-scoop",
         "buildCommand": ""
       }
     ]
