@@ -29,7 +29,7 @@
     },
 
     "nica": {
-      "profileDirectory": "nica",
+      "profileDirectory": "personal",
       "runOnStartup": {
         "urls": [
           "https://nicaindia.wordpress.com/"
@@ -38,7 +38,7 @@
     },
 
     "blog": {
-      "profileDirectory": "blog",
+      "profileDirectory": "personal",
       "runOnStartup": {
         "urls": [
           "https://my.bluehost.in/hosting/app?lil=1#/",
@@ -52,7 +52,7 @@
     },
 
     "finance": {
-      "profileDirectory": "finance",
+      "profileDirectory": "personal",
       "runOnStartup": {
         "urls": [
           "https://netbanking.hdfcbank.com/netbanking/",
