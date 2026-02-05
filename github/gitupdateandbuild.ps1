@@ -1,3 +1,5 @@
+Set-Location $PSScriptRoot
+
 param(
     [string]$JsonPath = (Join-Path $PSScriptRoot "github.json")
 )
