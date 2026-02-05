@@ -1,3 +1,5 @@
+Set-Location $PSScriptRoot
+
 param(
     [string]$WorkingDirectory = (Get-Location).Path,
     [switch]$ResetData

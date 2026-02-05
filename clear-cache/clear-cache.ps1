@@ -1,3 +1,5 @@
+Set-Location $PSScriptRoot
+
 $ErrorActionPreference = "SilentlyContinue"
 
 # User temp folders

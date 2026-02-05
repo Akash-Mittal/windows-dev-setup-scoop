@@ -1,3 +1,5 @@
+Set-Location $PSScriptRoot
+
 $rainmeterFolder = Join-Path $PSScriptRoot "rainmeter\trump-skins"
 $rainmeterScoopFolder = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\Skins\rainmeter"
 if (Test-Path $rainmeterFolder) {

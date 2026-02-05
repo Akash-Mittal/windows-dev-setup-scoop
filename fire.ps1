@@ -27,18 +27,18 @@ git config core.longpaths true 2>$null
 git config --global core.longpaths true 2>$null
 
 $startupItems = @(
+    @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe" },
     @{ Name = "Chrome Browser"; Path = Join-Path $PSScriptRoot "chrome\chrome-open-profiles.ps1"; Arguments = "personal work" },
     @{ Name = "Rainmeter"; Path = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\rainmeter.exe" },
     @{ Name = "IntelliJ IDEA Ultimate"; Path = Join-Path $env:USERPROFILE "scoop\apps\idea-ultimate\current\IDE\bin\idea64.exe" },
     @{ Name = "Notepad++"; Path = Join-Path $env:USERPROFILE "scoop\apps\notepadplusplus\current\notepad++.exe" },
-    @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe" },
     @{ Name = "NoSleep"; Path = Join-Path $env:USERPROFILE "scoop\apps\nosleep\current\NoSleep.exe" },
-    @{ Name = "AutoHotkey"; Path = Join-Path $env:USERPROFILE "scoop\apps\autohotkey\current\v2\AutoHotkey64.exe" ; Arguments = "autohotkey\vpn-login.ahk"},
+    @{ Name = "AutoHotkey"; Path = Join-Path $PSScriptRoot "autohotkey\start-vpn-login.ps1" },
     @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\clear-cache.ps1" },
     @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker-compose.ps1"; Arguments = "-ResetData:$false" },
     @{ Name = "Scoop Update"; Path = Join-Path $PSScriptRoot "scoop\scoop.update.ps1" },
     @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\gitupdateandbuild.ps1" },
-    @{ Name = "MongoDB Compass"; Path = Join-Path $env:LOCALAPPDATA "MongoDBCompass\MongoDBCompass.exe" }
+    @{ Name = "MongoDB Compass"; Path = Join-Path $PSScriptRoot "scoop\apps\mongodb-compass\current\MongoDBCompass.exe" }
 )
 
 foreach ($item in $startupItems) {
