@@ -22,6 +22,12 @@ function Ensure-ScoopBucket {
     }
 }
 
+scoop bucket add nerd-fonts
+scoop install Hack-NF
+scoop install php
+scoop install composer
+scoop install apache
+
 Ensure-ScoopBucket "main"
 Ensure-ScoopBucket "extras"
 Ensure-ScoopBucket "versions"
