@@ -22,17 +22,17 @@ function Ensure-ScoopBucket {
     }
 }
 
-scoop bucket add nerd-fonts
-scoop install Hack-NF
-scoop install php
-scoop install composer
-scoop install apache
-
 Ensure-ScoopBucket "main"
 Ensure-ScoopBucket "extras"
 Ensure-ScoopBucket "versions"
 Ensure-ScoopBucket "java"
+Ensure-ScoopBucket "nerd-fonts"
 
+Ensure-ScoopPackage "Hack-NF"
+Ensure-ScoopPackage "php"
+Ensure-ScoopPackage "composer"
+Ensure-ScoopPackage "apache"
+Ensure-ScoopPackage "opemssl"
 Ensure-ScoopPackage "git"
 Ensure-ScoopPackage "openjdk21"
 Ensure-ScoopPackage "maven"
