@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   trump-local-mongo-database-service:
     image: mongo:8
