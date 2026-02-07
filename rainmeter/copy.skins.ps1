@@ -1,9 +1,13 @@
 Set-Location $PSScriptRoot
+$ErrorActionPreference = "Stop"
 
-$rainmeterFolder = Join-Path $PSScriptRoot "rainmeter\trump-skins"
-$rainmeterScoopFolder = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\Skins\rainmeter"
-if (Test-Path $rainmeterFolder) {
-    Copy-Item -Path $rainmeterFolder -Destination $rainmeterScoopFolder -Recurse -Force
-} else {
-    Write-Warning "rainmeter skins folder not found at '$rainmeterFolder'. Skipping Rainmeter skin copy."
-}
+$skinsSource = Join-Path $PSScriptRoot "trump-skins"
+$documents = [Environment]::GetFolderPath("MyDocuments")
+$rainmeterSkins = Join-Path $documents "Rainmeter\Skins"
+
+if (!(Test-Path -LiteralPath $skinsSource)) { Write-Error "Skins source not found: $skinsSource"; exit 1 }
+
+New-Item -ItemType Directory -Force -Path $rainmeterSkins | Out-Null
+Copy-Item -LiteralPath $skinsSource -Destination $rainmeterSkins -Recurse -Force
+
+Write-Host "Copied skins to: $rainmeterSkins"

@@ -25,6 +25,7 @@ if ($fireConfig.installonstartup -eq $true) {
 
 git config core.longpaths true 2>$null
 git config --global core.longpaths true 2>$null
+composer update
 
 $startupItems = @(
     @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe" },

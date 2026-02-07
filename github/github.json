@@ -16,10 +16,6 @@
       {
         "path": "github\\work\\terraform-clp-crosschannel-posting",
         "buildCommand": ""
-      },
-      {
-        "path": "github\\personal\\windows-dev-setup-scoop",
-        "buildCommand": ""
       }
     ]
   }
