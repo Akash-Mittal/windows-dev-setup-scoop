@@ -1,10 +1,7 @@
-Set-Location $PSScriptRoot
-
 param(
-    [string]$WorkingDirectory = (Get-Location).Path,
+    [string]$WorkingDirectory = $PSScriptRoot,
     [switch]$ResetData
 )
-
 $ErrorActionPreference = "Stop"
 
 Set-Location $WorkingDirectory -ErrorAction Stop

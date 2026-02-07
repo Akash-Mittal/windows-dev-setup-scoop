@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   trump-local-mongo-database-service:
     image: mongo:8
@@ -8,9 +10,7 @@ services:
       - "27018:27018"
       - "27019:27019"
     volumes:
-      - trump_local_mongo_rs0_1:/data/rs0-1
-      - trump_local_mongo_rs0_2:/data/rs0-2
-      - trump_local_mongo_rs0_3:/data/rs0-3
+      - ./data/mongo:/data/db
       - ./scripts:/scripts:ro
     networks:
       - trump-local-networks
@@ -30,7 +30,7 @@ services:
       - trump-local-networks
 
   trump-local-mysql-service:
-    image: mysql:8.4
+    image: mysql:8.1.0
     container_name: trump-local-mysql-container
     ports:
       - "3306:3306"
@@ -40,9 +40,8 @@ services:
       MYSQL_USER: trump
       MYSQL_PASSWORD: trump
     volumes:
-      - trump_local_mysql_data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     command: >
-      --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
     networks:
