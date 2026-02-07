@@ -52,13 +52,27 @@ function Start-ExeAsync([string]$file, [string[]]$argList, [string]$workDir, [st
     return Start-Process @params
 }
 
-if (-not (Test-Path $JsonPath -PathType Leaf)) {
+function Resolve-RepoPath([string]$path, [string]$githubRoot) {
+    if ([string]::IsNullOrWhiteSpace($path)) { return $path }
+    if ([System.IO.Path]::IsPathRooted($path)) { return $path }
+
+    $p = $path.TrimStart('\','/')
+
+    if ($p -match '^(?i)github[\\/]+') {
+        $p = $p -replace '^(?i)github[\\/]+', ''
+        return (Join-Path $githubRoot $p)
+    }
+
+    return (Join-Path $githubRoot $p)
+}
+
+if (-not (Test-Path -LiteralPath $JsonPath -PathType Leaf)) {
     Write-ErrorLog "github.json not found: $JsonPath"
     exit 1
 }
 
 try {
-    $cfg = Get-Content -Raw -Path $JsonPath | ConvertFrom-Json
+    $cfg = Get-Content -Raw -LiteralPath $JsonPath | ConvertFrom-Json
 } catch {
     Write-ErrorLog "Failed to parse JSON: $($_.Exception.Message)"
     exit 1
@@ -70,24 +84,31 @@ if (-not $repos -or $repos.Count -eq 0) {
     exit 1
 }
 
+$githubRoot = Join-Path $env:USERPROFILE "github"
+
+if (-not (Test-Path -LiteralPath $githubRoot -PathType Container)) {
+    Write-ErrorLog "GitHub root folder not found: $githubRoot"
+    exit 1
+}
+
 $anyFailed = $false
 $buildProcesses = @()
 
 foreach ($repo in $repos) {
-    $repoPath = $repo.path
+    $repoPath = Resolve-RepoPath $repo.path $githubRoot
     $buildCommand = $repo.buildCommand
 
     if ([string]::IsNullOrWhiteSpace($repoPath)) { continue }
 
     Write-DebugLog "Repo: $repoPath"
 
-    if (-not (Test-Path $repoPath -PathType Container)) {
+    if (-not (Test-Path -LiteralPath $repoPath -PathType Container)) {
         Write-ErrorLog "Path not found: $repoPath"
         $anyFailed = $true
         continue
     }
 
-    if (-not (Test-Path (Join-Path $repoPath ".git") -PathType Container)) {
+    if (-not (Test-Path -LiteralPath (Join-Path $repoPath ".git") -PathType Container)) {
         Write-ErrorLog "Not a git repo (missing .git): $repoPath"
         $anyFailed = $true
         continue
