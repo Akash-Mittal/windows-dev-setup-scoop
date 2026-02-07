@@ -1,10 +1,11 @@
 # Windows Development Environment Setup with Scoop
 
-This folder contains a PowerShell script to automate the setup of a Windows development environment using [Scoop](https://scoop.sh/).
+This folder contains PowerShell scripts to automate the setup and maintenance of a Windows development environment using [Scoop](https://scoop.sh/).
 
-## Script
+## Scripts
 
-`windows-dev-env-setup-with-scoop.ps1`: This script installs a comprehensive set of development tools and applications.
+*   `windows-dev-env-setup-with-scoop.ps1`: Installs a comprehensive set of development tools and applications.
+*   `scoop.update.ps1`: Updates all installed Scoop packages.
 
 ### Prerequisites
 
@@ -15,33 +16,19 @@ This folder contains a PowerShell script to automate the setup of a Windows deve
     irm get.scoop.sh | iex
     ```
 
-### Usage
-
-1.  Open a PowerShell terminal.
-2.  Navigate to this folder.
-3.  Run the `windows-dev-env-setup-with-scoop.ps1` script.
-
 ### How to run
 
-To run the `windows-dev-env-setup-with-scoop.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
+To run the scripts, open a PowerShell terminal, navigate to this directory, and execute the desired script:
 
 ```powershell
+# To set up the environment
 .\windows-dev-env-setup-with-scoop.ps1
+
+# To update installed packages
+.\scoop.update.ps1
 ```
 
-To run the `sccop.update.bat` script, open a Command Prompt or PowerShell terminal, navigate to this directory, and execute:
-
-```cmd
-sccop.update.bat
-```
-
-To run the `sccop.update.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
-
-```powershell
-.\sccop.update.ps1
-```
-
-### What it Installs
+### What `windows-dev-env-setup-with-scoop.ps1` Installs
 
 The script will install the following software using Scoop:
 

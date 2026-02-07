@@ -2,29 +2,24 @@
 
 This folder contains AutoHotkey scripts for automating various tasks.
 
-## VPN Login
+## VPN Login (`vpn-login.ahk`)
 
 The `vpn-login.ahk` script automates the process of logging into the Cisco Secure Client VPN.
 
 ### Prerequisites
 
 *   [AutoHotkey v2.0](https://www.autohotkey.com/) must be installed.
-*   The Cisco Secure Client must be installed in the default location (`C:\Program Files (x86)\Cisco\Cisco Secure Client`).
+*   The Cisco Secure Client must be installed in its default location (`C:\Program Files (x86)\Cisco\Cisco Secure Client`).
 *   An environment variable named `MITTALA_WINDOWS_PASSWORD` must be set to your Windows password.
+
+> **Security Warning:** Storing your password in an environment variable can be a security risk. Ensure your system is secure and use this feature at your own discretion.
 
 ### Usage
 
-1.  Run the `vpn-login.ahk` script.
-2.  The script will automatically attempt to log in to the VPN 5 seconds after it starts.
-3.  You can also trigger the login manually by pressing `Ctrl+Alt+C`.
-
-### How to run
-
-To run the `vpn-login.ahk` script:
-
-1.  Ensure AutoHotkey v2.0 is installed.
-2.  Simply double-click the `vpn-login.ahk` file.
-3.  The script will start and attempt to log in to the VPN after 5 seconds. You can also manually trigger the login by pressing `Ctrl+Alt+C`.
+1.  Make sure the prerequisites are met.
+2.  Run the `vpn-login.ahk` script by double-clicking the file.
+3.  The script will automatically attempt to log in to the VPN 5 seconds after it starts.
+4.  You can also trigger the login manually by pressing `Ctrl+Alt+C`.
 
 ### How it Works
 

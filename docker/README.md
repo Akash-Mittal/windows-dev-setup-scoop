@@ -5,21 +5,15 @@ This folder contains the necessary files to set up a local development environme
 ## Files
 
 *   `docker-compose.yml`: The main Docker Compose file that defines the MongoDB and ActiveMQ services.
-*   `start-docker-compose.ps1`: A PowerShell script to pull the latest changes from Git, stop and remove any existing containers, and then start the Docker Compose environment in detached mode.
+*   `start-docker-compose.ps1`: A PowerShell script to start the Docker Compose environment.
 *   `config-mongo-db-container.sh`: A shell script that configures the MongoDB replica set within the container.
-*   `.env`: An environment file for Docker Compose (if needed).
+*   `.env`: An environment file for Docker Compose. You can use this file to customize the environment variables used in the `docker-compose.yml` file.
 
-## Usage
+## `start-docker-compose.ps1`
 
-1.  Make sure you have Docker Desktop installed and running.
-2.  Run the `start-docker-compose.ps1` script to start the environment.
-3.  The script will:
-    *   Change to the script's directory (or a specified working directory).
-    *   Bring down and remove any existing Docker Compose services.
-    *   Remove any containers with conflicting names.
-    *   Start the services in detached mode.
+The `start-docker-compose.ps1` script pulls the latest changes from Git, stops and removes any existing containers, and then starts the Docker Compose environment in detached mode.
 
-## How to run
+### How to run
 
 To run the `start-docker-compose.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
 

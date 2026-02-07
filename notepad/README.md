@@ -1,28 +1,24 @@
-# Miscellaneous Scripts
+# Notepad++ Default File Associations
 
-This folder contains miscellaneous utility scripts.
+This PowerShell script sets Notepad++ as the default application for a wide variety of file extensions, primarily those used in development.
 
-## Set Default File Extensions for Notepad++
+## `default-file-extension.notepad.ps1`
 
-The `defualt-file-extension.notepad.ps1` script sets Notepad++ as the default application for a wide variety of file extensions, primarily those used in development.
+The `default-file-extension.notepad.ps1` script sets Notepad++ as the default application for a predefined list of file extensions.
 
 ### Prerequisites
 
 *   Notepad++ must be installed via Scoop to the default location (`$env:USERPROFILE\scoop\apps\notepadplusplus\current\notepad++.exe`).
 *   The script must be run with administrator privileges.
 
-### Usage
-
-1.  Open a PowerShell terminal with administrator privileges.
-2.  Navigate to this folder.
-3.  Run the `defualt-file-extension.notepad.ps1` script.
-
 ### How to run
 
-To run the `defualt-file-extension.notepad.ps1` script, open a PowerShell terminal with administrator privileges, navigate to this directory, and execute:
+1.  Open a PowerShell terminal with administrator privileges.
+2.  Navigate to this directory.
+3.  Execute the script:
 
 ```powershell
-.\defualt-file-extension.notepad.ps1
+.\default-file-extension.notepad.ps1
 ```
 
 ### How it Works

@@ -4,20 +4,30 @@ This folder contains configuration files for IntelliJ IDEA, tailored for this pr
 
 ## Files
 
-*   `detekt.yml`: Configuration file for [Detekt](https://detekt.github.io/detekt/), a static code analysis tool for Kotlin. This file defines the rules and settings for code analysis.
-*   `CodeStyle-XCP.xml`: An XML file containing the code style settings for the project. This can be imported into IntelliJ to ensure consistent code formatting.
-*   `inspection-settings.xml`: An XML file that defines the inspection profile for the project. This file configures which inspections are enabled and their severity levels.
-*   `settings.zip`: A ZIP file containing exported IntelliJ IDEA settings. This can be imported to quickly set up an IDE with the project's recommended settings.
+*   `detekt.yml`: Configuration file for [Detekt](https://detekt.github.io/detekt/), a static code analysis tool for Kotlin.
+*   `CodeStyle-XCP.xml`: An XML file containing the code style settings for the project.
+*   `inspection-settings.xml`: An XML file that defines the inspection profile for the project.
+*   `settings.zip`: A ZIP file containing exported IntelliJ IDEA settings.
 
 ## Usage
 
-To use these configuration files:
+To use these configuration files, import them into IntelliJ IDEA:
 
-1.  **Code Style**: In IntelliJ, go to `File > Settings > Editor > Code Style`, click the gear icon, and select `Import Scheme > IntelliJ IDEA code style XML`. Select the `CodeStyle-XCP.xml` file.
-2.  **Inspections**: Go to `File > Settings > Editor > Inspections`, click the gear icon, and select `Import Profile...`. Select the `inspection-settings.xml` file.
-3.  **Detekt**: The `detekt.yml` file is used by the Detekt tool. Refer to the Detekt documentation for instructions on how to integrate it with your build process.
-4.  **Settings**: To import the settings from `settings.zip`, go to `File > Manage IDE Settings > Import Settings...` and select the `settings.zip` file.
+1.  **Code Style**:
+    *   Go to `File > Settings > Editor > Code Style`.
+    *   Click the gear icon and select `Import Scheme > IntelliJ IDEA code style XML`.
+    *   Select the `CodeStyle-XCP.xml` file.
 
-### How to run
+2.  **Inspections**:
+    *   Go to `File > Settings > Editor > Inspections`.
+    *   Click the gear icon and select `Import Profile...`.
+    *   Select the `inspection-settings.xml` file.
 
-These files are configuration files and are not meant to be "run" in the traditional sense. They are imported or used by IntelliJ IDEA. Please refer to the "Usage" section above for instructions on how to apply these configurations.
+3.  **Detekt**:
+    *   The `detekt.yml` file is used by the Detekt tool. Refer to the [Detekt documentation](https://detekt.github.io/detekt/cli.html) for instructions on how to integrate it with your build process.
+
+4.  **Settings**:
+    *   Go to `File > Manage IDE Settings > Import Settings...`.
+    *   Select the `settings.zip` file.
+
+> **Note:** Importing `settings.zip` will overwrite your existing IntelliJ IDEA settings. It is recommended to back up your settings before importing.

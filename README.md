@@ -20,7 +20,7 @@ The `fire.ps1` script is the main entry point for setting up the development env
     *   `clear-cache.ps1`
     *   `start-docker-compose.ps1`
     *   `gitupdateandbuild.ps1`
-    *   `sccop.update.ps1`
+    *   `scoop.update.ps1`
     *   `chrome-open-profiles.ps1`
     *   `vpn-login.ahk`
 *   Copies the Rainmeter skins to the appropriate directory.
@@ -32,6 +32,12 @@ To run the `fire.ps1` script, open a PowerShell terminal, navigate to the root o
 
 ```powershell
 .\fire.ps1
+```
+
+**Note:** You may need to set the execution policy to `RemoteSigned` to run the script. You can do this by running the following command in a PowerShell terminal with administrator privileges:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned
 ```
 
 ## Folders
@@ -48,7 +54,7 @@ To run the `fire.ps1` script, open a PowerShell terminal, navigate to the root o
 
 *   [**intellij**](./intellij/README.md): Contains IntelliJ IDEA configuration files, including code style, inspection profiles, and Detekt settings.
 
-*   [**misc**](notepad/README.md): Contains a PowerShell script to set Notepad++ as the default application for various file extensions.
+*   [**notepad**](./notepad/README.md): Contains a PowerShell script to set Notepad++ as the default application for various file extensions.
 
 *   [**rainmeter**](./rainmeter/README.md): Contains skins for the Rainmeter desktop customization tool, including clocks and a reminder.
 

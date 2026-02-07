@@ -2,12 +2,12 @@
 
 This PowerShell script clears the user and Windows temporary file folders.
 
-## Usage
+## `clear-cache.ps1`
 
-Run the `clear-cache.ps1` script to remove temporary files from the following locations:
+The `clear-cache.ps1` script removes temporary files from the following locations:
 
-* `%TEMP%`
-* `C:\Windows\Temp`
+*   `%TEMP%`
+*   `C:\Windows\Temp`
 
 **Note:** This script requires administrator privileges to clear temporary files from `C:\Windows\Temp`. The script will attempt to elevate itself if not already running as administrator.
 
