@@ -86,5 +86,6 @@ winget install -e --id Docker.DockerDesktop
 # whatspp beta
 # winget install -e --id 9NBDXK71NK08
 # winget install Google.Drive
+winget install -e --id TortoiseGit.TortoiseGit
 
 Read-Host "Press Enter to exit..."
