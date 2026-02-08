@@ -88,4 +88,4 @@ winget install -e --id Docker.DockerDesktop
 # winget install Google.Drive
 winget install -e --id TortoiseGit.TortoiseGit
 
-Read-Host "Press Enter to exit..."
+Read-Host "Press Enter to exit..."cd

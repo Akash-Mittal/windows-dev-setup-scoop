@@ -29,7 +29,7 @@ $extensions = @(
 
     ".sh",".bash",".zsh",".fish",
     ".ps1",".psm1",".psd1",
-    ".bat",".cmd",
+    ".bat",".cmd",".pub",
 
     ".sql",".graphql",".gql",
     ".dockerfile",".dockerignore",
@@ -70,7 +70,7 @@ Write-Host "File associations with Notepad++ completed."
 cmd /c "ftype NotepadPP.File"
 
 # --- Notepad++ File Associations ---
-$notepadAssocScript = Join-Path $PSScriptRoot "misc\defualt-file-extension.notepad.ps1"
+$notepadAssocScript = Join-Path $PSScriptRoot "defualt-file-extension.notepad.ps1"
 if (Test-Path $notepadAssocScript) {
     Write-Host "Running Notepad++ file association script..."
     # The script itself handles elevation, so we just execute it.

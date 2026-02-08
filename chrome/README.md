@@ -22,18 +22,38 @@ The `chrome.json` file is a JSON object where each top-level key represents a di
         "https://www.github.com"
       ]
     }
+  },
+  "work": {
+    "profileDirectory": "Profile 2",
+    "runOnStartup": {
+      "urls": [
+        "https://www.jira.com",
+        "https://www.confluence.com"
+      ]
+    }
   }
 }
 ```
 
 ## `chrome-open-profiles.ps1`
 
-The `chrome-open-profiles.ps1` script reads the `chrome.json` file and launches Chrome with the configured profiles and URLs.
+The `chrome-open-profiles.ps1` script reads the `chrome.json` file and launches Chrome with the configured profiles and URLs. It can be run with specific profile names as arguments to open only those profiles.
 
 ### How to run
 
-To run the `chrome-open-profiles.ps1` script, open a PowerShell terminal, navigate to this directory, and execute:
+1.  **Via `fire.ps1`**:
+    The `fire.ps1` script (located in the repository root) is configured to call `chrome-open-profiles.ps1` with specific profile names (e.g., `personal work`) as part of its startup sequence.
 
-```powershell
-.\chrome-open-profiles.ps1
-```
+2.  **Manually from PowerShell**:
+    Open a PowerShell terminal, navigate to this `chrome` directory, and execute:
+
+    *   **To open all configured profiles**:
+        ```powershell
+        .\chrome-open-profiles.ps1
+        ```
+
+    *   **To open specific profiles (e.g., "personal" and "work")**:
+        ```powershell
+        .\chrome-open-profiles.ps1 personal work
+        ```
+        Replace `personal work` with the names of the profiles you wish to open, as defined in `chrome.json`.

@@ -33,6 +33,7 @@ $startupItems = @(
     @{ Name = "Rainmeter"; Path = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\rainmeter.exe" },
     @{ Name = "IntelliJ IDEA Ultimate"; Path = Join-Path $env:USERPROFILE "scoop\apps\idea-ultimate\current\IDE\bin\idea64.exe" },
     @{ Name = "Notepad++"; Path = Join-Path $env:USERPROFILE "scoop\apps\notepadplusplus\current\notepad++.exe" },
+    @{ Name = "Open Notepad Files"; Path = Join-Path $PSScriptRoot "notepad\open.text.files.ps1" },
     @{ Name = "NoSleep"; Path = Join-Path $env:USERPROFILE "scoop\apps\nosleep\current\NoSleep.exe" },
     @{ Name = "AutoHotkey"; Path = Join-Path $PSScriptRoot "autohotkey\start-vpn-login.ps1" },
     @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\clear-cache.ps1" },
