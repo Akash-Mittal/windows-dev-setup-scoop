@@ -37,7 +37,7 @@ $startupItems = @(
     @{ Name = "Open Notepad Files"; Path = Join-Path $PSScriptRoot "notepad\start-open-default-text-files.ps1" },
     @{ Name = "NoSleep"; Path = Join-Path $env:USERPROFILE "scoop\apps\nosleep\current\NoSleep.exe" },
     @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\start-clear-cache.ps1" },
-    @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker-compose.ps1"; Arguments = "-ResetData:$false" },
+    @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker.ps1"; Arguments = "-ResetData:$false" },
     @{ Name = "MongoDB Compass"; Path = Join-Path $PSScriptRoot "scoop\apps\mongodb-compass\current\MongoDBCompass.exe" },
     @{ Name = "Scoop Update"; Path = Join-Path $PSScriptRoot "scoop\start-scoop-update.ps1" },
     @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\start-git-update-build.ps1" }
