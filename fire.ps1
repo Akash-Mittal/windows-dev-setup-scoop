@@ -15,7 +15,7 @@ try {
 }
 
 if ($fireConfig.installonstartup -eq $true) {
-    $scoopSetup = Join-Path $PSScriptRoot "scoop\windows-dev-env-setup-with-scoop.ps1"
+    $scoopSetup = Join-Path $PSScriptRoot "scoop\start-scoop-windows-setup.ps1"
     if (!(Test-Path $scoopSetup)) {
         Write-Error "Setup script not found at $scoopSetup"
         exit 1
@@ -28,19 +28,19 @@ git config --global core.longpaths true 2>$null
 composer update
 
 $startupItems = @(
+    @{ Name = "AutoHotkey"; Path = Join-Path $PSScriptRoot "autohotkey\start-vpn-login.ahk" },
     @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe" },
-    @{ Name = "Chrome Browser"; Path = Join-Path $PSScriptRoot "chrome\chrome-open-profiles.ps1"; Arguments = "personal work" },
+    @{ Name = "Chrome Browser"; Path = Join-Path $PSScriptRoot "chrome\start-chrome.ps1"; Arguments = "personal work finance" },
     @{ Name = "Rainmeter"; Path = Join-Path $env:USERPROFILE "scoop\apps\rainmeter\current\rainmeter.exe" },
     @{ Name = "IntelliJ IDEA Ultimate"; Path = Join-Path $env:USERPROFILE "scoop\apps\idea-ultimate\current\IDE\bin\idea64.exe" },
     @{ Name = "Notepad++"; Path = Join-Path $env:USERPROFILE "scoop\apps\notepadplusplus\current\notepad++.exe" },
-    @{ Name = "Open Notepad Files"; Path = Join-Path $PSScriptRoot "notepad\open.text.files.ps1" },
+    @{ Name = "Open Notepad Files"; Path = Join-Path $PSScriptRoot "notepad\start-open-default-text-files.ps1" },
     @{ Name = "NoSleep"; Path = Join-Path $env:USERPROFILE "scoop\apps\nosleep\current\NoSleep.exe" },
-    @{ Name = "AutoHotkey"; Path = Join-Path $PSScriptRoot "autohotkey\start-vpn-login.ps1" },
-    @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\clear-cache.ps1" },
+    @{ Name = "Clear Cache"; Path = Join-Path $PSScriptRoot "clear-cache\start-clear-cache.ps1" },
     @{ Name = "Start Docker Compose"; Path = Join-Path $PSScriptRoot "docker\start-docker-compose.ps1"; Arguments = "-ResetData:$false" },
-    @{ Name = "Scoop Update"; Path = Join-Path $PSScriptRoot "scoop\scoop.update.ps1" },
-    @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\gitupdateandbuild.ps1" },
-    @{ Name = "MongoDB Compass"; Path = Join-Path $PSScriptRoot "scoop\apps\mongodb-compass\current\MongoDBCompass.exe" }
+    @{ Name = "MongoDB Compass"; Path = Join-Path $PSScriptRoot "scoop\apps\mongodb-compass\current\MongoDBCompass.exe" },
+    @{ Name = "Scoop Update"; Path = Join-Path $PSScriptRoot "scoop\start-scoop-update.ps1" },
+    @{ Name = "Git Update and Build"; Path = Join-Path $PSScriptRoot "github\start-git-update-build.ps1" }
 )
 
 foreach ($item in $startupItems) {
