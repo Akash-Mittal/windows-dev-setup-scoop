@@ -6,7 +6,7 @@
         "buildCommand": "mvn clean package -o -T 1C -Denv=release"
       },
       {
-        "path": "github\\work\\xcp-posting-clean-trump-branch\\xcp-posting",
+        "path": "github\\work\\xcp-posting-test",
         "buildCommand": "mvn clean package -o -T 1C -Denv=release"
       },
       {

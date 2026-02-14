@@ -77,6 +77,7 @@ Ensure-ScoopPackage "mysql"
 Ensure-ScoopPackage "kubectl"
 Ensure-ScoopPackage "minikube"
 Ensure-ScoopPackage "vscode"
+Ensure-ScoopPackage "jq"
 
 # Libra office is very heavy install, uncomment in case you really want it.
 # Ensure-ScoopPackage "libreoffice"
