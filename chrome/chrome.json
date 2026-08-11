@@ -18,8 +18,9 @@
       "profileDirectory": "work",
       "runOnStartup": {
         "urls": [
-          "https://confluence.media-saturn.com/spaces/~mittala/overview",
-          "https://jira.media-saturn.com/secure/RapidBoard.jspa?rapidView=4538#",
+          "https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/~mittala/overview",
+          "https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/XCPCP/calendars",
+          "https://jira.atlassian.mediamarktsaturn.com/jira/software/c/projects/XCP/boards/2698?useStoredSettings=true",
           "https://console.cloud.google.com/run/overview?project=mms-xcp-xcp-p",
           "https://github.com/MediaMarktSaturn/xcp-posting",
           "https://cloud.mongodb.com/v2/632db29faf84ef7bf684e4ab#/clusters",
@@ -61,8 +62,7 @@
           "https://meine.deutsche-bank.de/#/banking/financial-overview",
           "https://particulares.bancosantander.es/oneweb/global-position",
           "https://app.n26.com/feed",
-          "https://app.revolut.com/home",
-          "https://kite.zerodha.com"
+          "https://app.revolut.com/home"
         ]
       }
     }

@@ -78,6 +78,11 @@ Ensure-ScoopPackage "kubectl"
 Ensure-ScoopPackage "minikube"
 Ensure-ScoopPackage "vscode"
 Ensure-ScoopPackage "jq"
+Ensure-ScoopPackage "gitleaks"
+
+
+Ensure-ScoopPackage "python"
+pip install pywhatkit
 
 # Libra office is very heavy install, uncomment in case you really want it.
 # Ensure-ScoopPackage "libreoffice"

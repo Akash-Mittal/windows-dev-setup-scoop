@@ -26,6 +26,7 @@ if ($fireConfig.installonstartup -eq $true) {
 git config core.longpaths true 2>$null
 git config --global core.longpaths true 2>$null
 composer update
+composer global require laravel/installer
 
 $startupItems = @(
     @{ Name = "AutoHotkey"; Path = Join-Path $PSScriptRoot "autohotkey\start-vpn-login.ahk" },
