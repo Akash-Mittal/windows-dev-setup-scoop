@@ -55,7 +55,7 @@ list_repos() {
   while :; do
     response="$(curl -fsSL ${GITHUB_TOKEN:+-H "Authorization: Bearer $GITHUB_TOKEN"} \
       "https://api.github.com/users/$user/repos?per_page=100&page=$page")"
-    count="$(jq 'length' <<< "$response")"
+    count="$(jq 'length' <<< "$response" | tr -d '\r')"
     [[ "$count" -eq 0 ]] && break
     jq -r '.[] | "\(.name) \(.clone_url)"' <<< "$response"
     page=$((page + 1))
@@ -78,7 +78,8 @@ mkdir -p "$local_dir"
 echo "[DEBUG] GitHub user: $github_user"
 echo "[DEBUG] Checkout dir: $local_dir"
 
-repos="$(list_repos "$github_user")"
+# Windows builds of jq/gh emit CRLF; a trailing CR breaks the clone URL.
+repos="$(list_repos "$github_user" | tr -d '\r')"
 if [[ -z "$repos" ]]; then
   echo "[ERROR] No repos found for $github_user" >&2
   exit 1

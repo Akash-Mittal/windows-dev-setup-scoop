@@ -1,6 +1,6 @@
 worksheet,config,value
-install-configs,installonstartup,true
-github_config,config_localgithub_dir,~
+install-configs,installonstartup,TRUE
+github_config,config_localgithub_dir,D:\github\personal
 github_config,config_userprofile_checkout_dir,https://github.com/Akash-Mittal
 github_repos,github\work\xcp-posting-clean-main-branch\xcp-posting,mvn clean package -o -T 1C -Denv=release
 github_repos,github\work\xcp-posting-test,mvn clean package -o -T 1C -Denv=release
