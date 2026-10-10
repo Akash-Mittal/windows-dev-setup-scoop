@@ -56,7 +56,7 @@ composer global require laravel/installer
 startup_items=(
   "AutoHotkey|$SCRIPT_DIR/autohotkey/start-vpn-login.ahk|"
   "Docker Desktop|/c/Program Files/Docker/Docker/Docker Desktop.exe|"
-  "Chrome Browser|$SCRIPT_DIR/chrome/start-chrome.ps1|personal work finance"
+  "Chrome Browser|$SCRIPT_DIR/chrome/start-chrome.sh|"
   "Rainmeter|$USER_HOME/scoop/apps/rainmeter/current/rainmeter.exe|"
   "IntelliJ IDEA Ultimate|$USER_HOME/scoop/apps/idea-ultimate/current/IDE/bin/idea64.exe|"
   "Notepad++|$USER_HOME/scoop/apps/notepadplusplus/current/notepad++.exe|"

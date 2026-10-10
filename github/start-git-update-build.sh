@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-JSON_PATH="${1:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/github.json"}"
+CSV_PATH="${1:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../windows_dev_setup.csv"}"
 GITHUB_ROOT="${GITHUB_ROOT:-"$HOME/github"}"
 
-if [[ ! -f "$JSON_PATH" ]]; then
-  echo "[ERROR] github.json not found: $JSON_PATH" >&2
-  exit 1
-fi
-
-if ! command -v jq >/dev/null 2>&1; then
-  echo "[ERROR] jq not found. Install it:" >&2
-  echo "  - Git Bash (Windows): pacman -S jq" >&2
-  echo "  - Ubuntu/WSL: sudo apt-get update && sudo apt-get install -y jq" >&2
+if [[ ! -f "$CSV_PATH" ]]; then
+  echo "[ERROR] windows_dev_setup.csv not found: $CSV_PATH" >&2
   exit 1
 fi
 
@@ -23,16 +16,22 @@ fi
 
 any_failed=0
 
-repo_count="$(jq '.github.repos | length' "$JSON_PATH")"
-if [[ "$repo_count" -eq 0 ]]; then
-  echo "[ERROR] No repos found at github.repos in $JSON_PATH" >&2
+# Rows in worksheet github_repos: config = repo path, value = build command.
+repos="$(awk -F',' '
+  function clean(s) { gsub(/\r/, "", s); gsub(/^[ \t"]+|[ \t"]+$/, "", s); return s }
+  NR == 1 { next }
+  tolower(clean($1)) == "github_repos" {
+    cmd = $3; for (i = 4; i <= NF; i++) cmd = cmd "," $i
+    print clean($2) "\t" clean(cmd)
+  }
+' "$CSV_PATH")"
+
+if [[ -z "$repos" ]]; then
+  echo "[ERROR] No repos found in worksheet github_repos in $CSV_PATH" >&2
   exit 1
 fi
 
-for i in $(seq 0 $((repo_count - 1))); do
-  raw_path="$(jq -r ".github.repos[$i].path // empty" "$JSON_PATH")"
-  build_cmd="$(jq -r ".github.repos[$i].buildCommand // empty" "$JSON_PATH")"
-
+while IFS=$'\t' read -r raw_path build_cmd <&3; do
   [[ -z "$raw_path" ]] && continue
 
   rel_path="${raw_path#github/}"
@@ -84,7 +83,7 @@ for i in $(seq 0 $((repo_count - 1))); do
     any_failed=1
     continue
   }
-done
+done 3<<< "$repos"
 
 echo "========================================"
 if [[ "$any_failed" -ne 0 ]]; then
