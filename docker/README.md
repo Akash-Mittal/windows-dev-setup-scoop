@@ -19,8 +19,8 @@ The `start-docker.ps1` script is designed to manage your Docker Compose environm
 
 ### How to run
 
-1.  **Via `fire.ps1`**:
-    The `fire.ps1` script (located in the repository root) is configured to call `start-docker.ps1` as part of its startup sequence, typically without the `-ResetData` flag (e.g., `-ResetData:$false`).
+1.  **Via `fire.sh`**:
+    The `fire.sh` script (located in the repository root) is configured to call `start-docker.ps1` as part of its startup sequence, typically without the `-ResetData` flag (e.g., `-ResetData:$false`).
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `docker` directory, and execute:

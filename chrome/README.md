@@ -41,8 +41,8 @@ The `chrome-open-profiles.ps1` script reads the `chrome.json` file and launches 
 
 ### How to run
 
-1.  **Via `fire.ps1`**:
-    The `fire.ps1` script (located in the repository root) is configured to call `chrome-open-profiles.ps1` with specific profile names (e.g., `personal work`) as part of its startup sequence.
+1.  **Via `fire.sh`**:
+    The `fire.sh` script (located in the repository root) is configured to call `chrome-open-profiles.ps1` with specific profile names (e.g., `personal work`) as part of its startup sequence.
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `chrome` directory, and execute:

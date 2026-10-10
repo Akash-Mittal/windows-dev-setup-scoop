@@ -169,5 +169,5 @@ Ensure-WingetPackage "TortoiseGit.TortoiseGit"
 Ensure-WingetPackage "Google.GoogleDrive"
 # WhatsApp (Microsoft Store). For the beta use 9NBDXK71NK08 instead.
 Ensure-WingetPackage "9NKSQGP7F2NH" -Source "msstore"
-
+winget install SpanishGovernment.Autofirma
 Read-Host "Press Enter to exit..."

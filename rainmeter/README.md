@@ -17,8 +17,8 @@ This PowerShell script is responsible for copying the Rainmeter skins from the `
 
 ### How to run
 
-1.  **Via `fire.ps1`**:
-    The `fire.ps1` script (located in the repository root) is configured to call `copy.skins.ps1` as part of its startup sequence, ensuring your custom skins are deployed automatically.
+1.  **Via `fire.sh`**:
+    The `fire.sh` script (located in the repository root) is configured to call `copy.skins.ps1` as part of its startup sequence, ensuring your custom skins are deployed automatically.
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `rainmeter` directory, and execute:

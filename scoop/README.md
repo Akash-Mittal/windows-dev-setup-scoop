@@ -18,9 +18,9 @@ This folder contains PowerShell scripts to automate the setup and maintenance of
 
 ### How to run
 
-1.  **Via `fire.ps1` (Recommended for Automation)**:
-    *   `windows-dev-env-setup-with-scoop.ps1`: The `fire.ps1` script (located in the repository root) can be configured to call this setup script automatically if `installonstartup` is set to `true` in `fire.json`.
-    *   `scoop.update.ps1`: The `fire.ps1` script is configured to call `scoop.update.ps1` as part of its startup sequence to keep your Scoop applications updated.
+1.  **Via `fire.sh` (Recommended for Automation)**:
+    *   `windows-dev-env-setup-with-scoop.ps1`: The `fire.sh` script (located in the repository root) can be configured to call this setup script automatically if `installonstartup` is set to `true` in `windows_dev_setup.csv` (worksheet `install-configs`, defaults to true).
+    *   `scoop.update.ps1`: The `fire.sh` script is configured to call `scoop.update.ps1` as part of its startup sequence to keep your Scoop applications updated.
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `scoop` directory, and execute the desired script:

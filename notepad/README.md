@@ -61,8 +61,8 @@ This PowerShell script reads the `notepad.json` file and opens each specified fi
 
 ### How to run (`open.text.files.ps1`)
 
-1.  **Via `fire.ps1`**:
-    The `fire.ps1` script (located in the repository root) is configured to call `open.text.files.ps1` as part of its startup sequence, automatically opening your predefined list of files.
+1.  **Via `fire.sh`**:
+    The `fire.sh` script (located in the repository root) is configured to call `open.text.files.ps1` as part of its startup sequence, automatically opening your predefined list of files.
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `notepad` directory, and execute:

@@ -17,8 +17,8 @@ After execution, the script will pause and wait for user input before closing th
 
 ### How to run
 
-1.  **Via `fire.ps1`**:
-    The `fire.ps1` script (located in the repository root) is configured to call `start-clear-cache.ps1` as part of its startup sequence.
+1.  **Via `fire.sh`**:
+    The `fire.sh` script (located in the repository root) is configured to call `start-clear-cache.ps1` as part of its startup sequence.
 
 2.  **Manually from PowerShell**:
     Open a PowerShell terminal, navigate to this `clear-cache` directory, and execute:

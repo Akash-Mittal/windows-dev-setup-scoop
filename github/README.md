@@ -4,7 +4,7 @@ This PowerShell script automates the process of updating a single Git repository
 
 ## `github.json`
 
-The `github.json` file contains a list of repositories and their corresponding build commands. This file is primarily used by the `fire.ps1` script to determine which repositories to process and how to build them.
+The `github.json` file contains a list of repositories and their corresponding build commands. This file is primarily used by the `fire.sh` script to determine which repositories to process and how to build them.
 
 *   Each entry in the `repos` array should be an object with:
     *   `path`: The absolute path to the Git repository.
@@ -35,12 +35,12 @@ The `gitupdateandbuild.ps1` script performs the following actions:
 
 *   Executes `git fetch` to get the latest updates from the remote.
 *   Executes `git pull` to integrate those changes into the local branch.
-*   If a `buildCommand` is provided (e.g., via `fire.ps1` or directly as an argument), it executes that command to build the project.
+*   If a `buildCommand` is provided (e.g., via `fire.sh` or directly as an argument), it executes that command to build the project.
 
 ### How to run
 
-1.  **Via `fire.ps1` (Automated Processing)**:
-    The `fire.ps1` script (located in the repository root) is designed to iterate through subdirectories of a configured `GIT_REPO_HOME` environment variable. For each subdirectory (assumed to be a Git repository), `fire.ps1` will change into that directory and then call `gitupdateandbuild.ps1` within that context, passing the appropriate `buildCommand` from `github.json`.
+1.  **Via `fire.sh` (Automated Processing)**:
+    The `fire.sh` script (located in the repository root) is designed to iterate through subdirectories of a configured `GIT_REPO_HOME` environment variable. For each subdirectory (assumed to be a Git repository), `fire.sh` will change into that directory and then call `gitupdateandbuild.ps1` within that context, passing the appropriate `buildCommand` from `github.json`.
 
 2.  **Manually from PowerShell (within a Git repository)**:
     To run this script manually for a specific repository, first navigate to the root of that Git repository in a PowerShell terminal. Then, you can execute `gitupdateandbuild.ps1` with an optional build command:
