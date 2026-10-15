@@ -1,58 +1,48 @@
-# Git Update and Build
+# GitHub: clone, refresh and build
 
-This PowerShell script automates the process of updating a single Git repository and building its project. It is designed to be run from within a Git repository's directory.
+All repos live in the workspace (`general,root_dir` + `project_dir_name`, e.g. `D:\windows-dev-setup`):
 
-## `github.json`
-
-The `github.json` file contains a list of repositories and their corresponding build commands. This file is primarily used by the `fire.sh` script to determine which repositories to process and how to build them.
-
-*   Each entry in the `repos` array should be an object with:
-    *   `path`: The absolute path to the Git repository.
-    *   `buildCommand`: The command to execute for building the project (e.g., `mvn clean install`, `npm install && npm run build`).
-
-### Example `github.json`:
-
-```json
-{
-  "github": {
-    "repos": [
-      {
-        "path": "C:\\Users\\mittala\\github\\work\\my-java-project",
-        "buildCommand": "mvn clean install -Denv=release"
-      },
-      {
-        "path": "C:\\Users\\mittala\\github\\work\\my-js-project",
-        "buildCommand": "npm install && npm run build"
-      }
-    ]
-  }
-}
+```
+<workspace>\github\<user>\<repo>
+D:\windows-dev-setup\github\Akash-Mittal\repo1
+D:\windows-dev-setup\github\Another-User\repo1
 ```
 
-## `gitupdateandbuild.ps1`
+## `github-checkout.ps1`
 
-The `gitupdateandbuild.ps1` script performs the following actions:
+Clones every repo of each user in worksheet `github_users` that isn't checked out yet.
+Runs from `setup.ps1`, and at login when `clone_missing_on_startup` is `true`.
 
-*   Executes `git fetch` to get the latest updates from the remote.
-*   Executes `git pull` to integrate those changes into the local branch.
-*   If a `buildCommand` is provided (e.g., via `fire.sh` or directly as an argument), it executes that command to build the project.
+Uses `gh` when it is logged in (includes your private repos), otherwise the public GitHub API
+(`$env:GITHUB_TOKEN` is sent when set).
 
-### How to run
+## `start-git-update-build.ps1`
 
-1.  **Via `fire.sh` (Automated Processing)**:
-    The `fire.sh` script (located in the repository root) is designed to iterate through subdirectories of a configured `GIT_REPO_HOME` environment variable. For each subdirectory (assumed to be a Git repository), `fire.sh` will change into that directory and then call `gitupdateandbuild.ps1` within that context, passing the appropriate `buildCommand` from `github.json`.
+Runs at login (`startup_apps`, "Git refresh and build"):
 
-2.  **Manually from PowerShell (within a Git repository)**:
-    To run this script manually for a specific repository, first navigate to the root of that Git repository in a PowerShell terminal. Then, you can execute `gitupdateandbuild.ps1` with an optional build command:
+1. Clones new repos (if `clone_missing_on_startup`).
+2. Refreshes every repo under `<workspace>\github`.
+3. Builds the repos that have a `github_builds` row.
 
-    *   **To only fetch and pull (no build)**:
-        ```powershell
-        & "C:\Users\Lenovo\github\personal\windows-dev-setup-scoop\github\gitupdateandbuild.ps1"
-        ```
-        (Note: You need to provide the full path to the script if you are not in its directory)
+**Refresh never discards local work.** It runs `git fetch --all --prune`, then `git merge --ff-only` on the
+current branch's upstream. If local commits or uncommitted changes are in the way, the repo is left as it is and
+reported. There is no reset, no clean, and no branch switch.
 
-    *   **To fetch, pull, and execute a build command**:
-        ```powershell
-        & "C:\Users\Lenovo\github\personal\windows-dev-setup-scoop\github\gitupdateandbuild.ps1" -BuildCommand "mvn clean install"
-        ```
-        Replace `"mvn clean install"` with your desired build command.
+Git runs non-interactively, so a repo that needs credentials fails and is reported instead of waiting on a prompt.
+Build output goes to `logs\builds\<user>_<repo>.log`.
+
+## Settings
+
+| Row | Meaning |
+|---|---|
+| `github_users,<user>` | GitHub user whose repos to clone (one row per user) |
+| `github_config,clone_missing_on_startup,true` | Clone new repos at login, not only during setup |
+| `github_config,build_on_startup,true` | Run build commands at login |
+| `github_builds,<user>/<repo>,<command>` | Build command for one repo, e.g. `github_builds,Akash-Mittal/bp-wallet,mvn clean package` |
+
+## Run by hand
+
+```powershell
+.\github-checkout.ps1
+.\start-git-update-build.ps1
+```

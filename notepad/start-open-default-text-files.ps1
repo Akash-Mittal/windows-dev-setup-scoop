@@ -1,34 +1,26 @@
-$ErrorActionPreference = "SilentlyContinue"
+# Starts Notepad++ with the files in notepad_config,open_file rows (missing files are skipped).
 
-$notepadJsonPath = Join-Path $PSScriptRoot "notepad.json"
-if (!(Test-Path $notepadJsonPath)) {
-    Write-Warning "notepad.json not found at '$notepadJsonPath'. Skipping opening Notepad++ files."
-    exit 0
-}
+. (Join-Path $PSScriptRoot "..\lib\common.ps1")
 
-try {
-    $notepadConfig = Get-Content -Path $notepadJsonPath -Raw | ConvertFrom-Json
-} catch {
-    Write-Error "Failed to parse notepad.json. $($_.Exception.Message)"
+$notepadExe = Expand-ConfigPath (Get-ConfigValue "notepad_config" "notepad_exe" "~\scoop\apps\notepadplusplus\current\notepad++.exe")
+if (-not (Test-Path -LiteralPath $notepadExe)) {
+    Write-Warning "Notepad++ not found at '$notepadExe'."
     exit 1
 }
 
-$notepadExePath = Join-Path $env:USERPROFILE "scoop\apps\notepadplusplus\current\notepad++.exe"
-
-if (!(Test-Path $notepadExePath)) {
-    Write-Warning "Notepad++ executable not found at '$notepadExePath'. Cannot open files."
-    exit 1
-}
-
-if ($notepadConfig.openFiles) {
-    foreach ($filePath in $notepadConfig.openFiles) {
-        if (Test-Path $filePath) {
-            Write-Host "Opening file: $filePath"
-            Start-Process -FilePath $notepadExePath -ArgumentList "`"$filePath`"" -NoNewWindow
-        } else {
-            Write-Warning "File not found: $filePath. Skipping."
-        }
+$files = @()
+foreach ($file in Get-ConfigValues "notepad_config" "open_file") {
+    $path = Expand-ConfigPath $file
+    if (Test-Path -LiteralPath $path) {
+        $files += "`"$path`""
+    } else {
+        Write-Warning "File not found, skipping: $path"
     }
+}
+
+if ($files.Count -gt 0) {
+    Write-Host "Opening $($files.Count) file(s) in Notepad++"
+    Start-Process -FilePath $notepadExe -ArgumentList ($files -join " ")
 } else {
-    Write-Host "No files specified in notepad.json to open."
+    Start-Process -FilePath $notepadExe
 }

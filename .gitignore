@@ -1,3 +1,17 @@
+# IDE
 /.idea/
+*.iml
+/.mcp.json
+
+# Per-machine config (see windows_dev_setup.local.example.csv)
+/windows_dev_setup.local.csv
+
+# Cloned repos: github\<user>\<repo>
+/github/*/
+
+# Runtime output of setup.ps1 / startup.ps1
+/logs/
+/.state/
+
+# Docker volumes
 /docker/data/*
-/.idea/
