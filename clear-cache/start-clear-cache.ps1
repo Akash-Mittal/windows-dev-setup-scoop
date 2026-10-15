@@ -47,4 +47,3 @@ $totalDeleted += $r.Deleted; $totalFailed += $r.Failed
 
 Write-Debug "Summary | Deleted=$totalDeleted | Failed=$totalFailed"
 
-Read-Host "Press Enter to exit..."

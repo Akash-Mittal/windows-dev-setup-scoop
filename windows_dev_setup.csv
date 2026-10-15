@@ -1,43 +1,128 @@
-worksheet,config,value
-install-configs,installonstartup,TRUE
-github_config,config_localgithub_dir,D:\github\personal
-github_config,config_userprofile_checkout_dir,https://github.com/Akash-Mittal
-github_repos,github\work\xcp-posting-clean-main-branch\xcp-posting,mvn clean package -o -T 1C -Denv=release
-github_repos,github\work\xcp-posting-test,mvn clean package -o -T 1C -Denv=release
-github_repos,github\work\terraform-enterprise-orchestrator,
-github_repos,github\work\terraform-clp-crosschannel-posting,
-chrome_config,chrome_exe,
-chrome_config,delay_ms,150
-chrome_config,startup_profiles,personal work finance
-chrome_config,personal.profile_directory,personal
-chrome_config,personal.url,https://calendar.google.com/calendar/u/0/r
-chrome_config,personal.url,https://mail.google.com/mail/u/0/#inbox
-chrome_config,personal.url,https://mail.google.com/mail/u/1/#inbox
-chrome_config,personal.url,https://translate.google.com/?sl=es&tl=en&op=translate
-chrome_config,personal.url,https://www.google.com/maps
-chrome_config,personal.url,https://www.idealista.com/en/usuario/tus-alertas
-chrome_config,work.profile_directory,work
-chrome_config,work.url,https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/~mittala/overview
-chrome_config,work.url,https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/XCPCP/calendars
-chrome_config,work.url,https://jira.atlassian.mediamarktsaturn.com/jira/software/c/projects/XCP/boards/2698?useStoredSettings=true
-chrome_config,work.url,https://console.cloud.google.com/run/overview?project=mms-xcp-xcp-p
-chrome_config,work.url,https://github.com/MediaMarktSaturn/xcp-posting
-chrome_config,work.url,https://cloud.mongodb.com/v2/632db29faf84ef7bf684e4ab#/clusters
-chrome_config,work.url,https://xcp-prod-frontend-swzlilrgcq-ez.a.run.app/
-chrome_config,nica.profile_directory,personal
-chrome_config,nica.url,https://nicaindia.wordpress.com/
-chrome_config,blog.profile_directory,personal
-chrome_config,blog.url,https://my.bluehost.in/hosting/app?lil=1#/
-chrome_config,blog.url,https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/filemanager/index.html
-chrome_config,blog.url,https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/index.html
-chrome_config,blog.url,https://wordpress.com/sites/brainprintout.wordpress.com
-chrome_config,blog.url,https://brainprintout.wordpress.com/
-chrome_config,blog.url,https://nicaindia.wordpress.com/
-chrome_config,finance.profile_directory,personal
-chrome_config,finance.url,https://netbanking.hdfcbank.com/netbanking/
-chrome_config,finance.url,https://retailnetbanking.icici.bank.in/login-page
-chrome_config,finance.url,https://kunden.commerzbank.de/startpage/startpage
-chrome_config,finance.url,https://meine.deutsche-bank.de/#/banking/financial-overview
-chrome_config,finance.url,https://particulares.bancosantander.es/oneweb/global-position
-chrome_config,finance.url,https://app.n26.com/feed
-chrome_config,finance.url,https://app.revolut.com/home
+worksheet,config,value,args,enabled
+general,root_dir,D:,,
+general,project_dir_name,windows-dev-setup,,
+setup_settings,register_startup,true,,
+startup_settings,start_delay_seconds,15,,
+startup_settings,show_summary,false,,
+startup_settings,summary_timeout_seconds,30,,
+startup_settings,scoop_update_every_days,7,,
+startup_settings,autohotkey_exe,~\scoop\apps\autohotkey\current\v2\AutoHotkey64.exe,,
+scoop_buckets,main,,,
+scoop_buckets,extras,,,
+scoop_buckets,versions,,,
+scoop_buckets,java,,,
+scoop_buckets,nerd-fonts,,,
+scoop_packages,git,,,
+scoop_packages,Hack-NF,,,
+scoop_packages,php,,,
+scoop_packages,composer,,,
+scoop_packages,apache,,,
+scoop_packages,openssl,,,
+scoop_packages,openjdk21,,,
+scoop_packages,maven,,,
+scoop_packages,nodejs-lts,,,
+scoop_packages,nvm,,,
+scoop_packages,idea,,,
+scoop_packages,gcloud,,,
+scoop_packages,yarn,,,
+scoop_packages,mongodb-database-tools,,,
+scoop_packages,mongosh,,,
+scoop_packages,mongodb-compass,,,
+scoop_packages,postman,,,
+scoop_packages,jmeter,,,
+scoop_packages,insomnia,,,
+scoop_packages,gh,,,
+scoop_packages,filezilla,,,
+scoop_packages,cloudflared,,,
+scoop_packages,terraform,,,
+scoop_packages,autohotkey,,,
+scoop_packages,openshot,,,
+scoop_packages,googlechrome,,,
+scoop_packages,ffmpeg,,,
+scoop_packages,chatgpt,,,
+scoop_packages,claude-code,,,
+scoop_packages,7zip,,,
+scoop_packages,zoom,,,
+scoop_packages,vlc,,,
+scoop_packages,rainmeter,,,
+scoop_packages,nosleep,,,
+scoop_packages,sudo,,,
+scoop_packages,notepadplusplus,,,
+scoop_packages,kafka,,,
+scoop_packages,gradle,,,
+scoop_packages,scala,,,
+scoop_packages,mysql,,,
+scoop_packages,kubectl,,,
+scoop_packages,minikube,,,
+scoop_packages,vscode,,,
+scoop_packages,jq,,,
+scoop_packages,gitleaks,,,
+scoop_packages,python,,,
+scoop_packages,android-clt,,,
+scoop_packages,libreoffice,,,false
+winget_packages,TortoiseGit.TortoiseGit,winget,,
+winget_packages,Google.GoogleDrive,winget,,
+winget_packages,9NKSQGP7F2NH,msstore,,
+winget_packages,SpanishGovernment.Autofirma,winget,,
+winget_packages,Docker.DockerDesktop,winget,,false
+post_install,Git long paths,git config --global core.longpaths true,,
+post_install,pywhatkit,python -m pip install --upgrade pywhatkit,,
+post_install,Laravel installer,composer global require laravel/installer,,
+post_install,Android SDK licenses,1..30 | ForEach-Object { 'y' } | sdkmanager --licenses,,
+post_install,Android SDK packages,sdkmanager 'platform-tools' 'platforms;android-35' 'build-tools;35.0.0',,
+setup_scripts,Notepad++ file associations,{repo}\notepad\set-default-file-extensions.ps1,,
+setup_scripts,Rainmeter skins,{repo}\rainmeter\copy.skins.ps1,,
+setup_scripts,GitHub checkout,{repo}\github\github-checkout.ps1,,
+startup_apps,VPN login,{repo}\autohotkey\vpn-login.ahk,,
+startup_apps,Docker Desktop,C:\Program Files\Docker\Docker\Docker Desktop.exe,,
+startup_apps,Chrome,{repo}\chrome\start-chrome.ps1,,
+startup_apps,Rainmeter,~\scoop\apps\rainmeter\current\Rainmeter.exe,,
+startup_apps,IntelliJ IDEA,~\scoop\apps\idea\current\IDE\bin\idea64.exe,,
+startup_apps,Notepad++ files,{repo}\notepad\start-open-default-text-files.ps1,,
+startup_apps,NoSleep,~\scoop\apps\nosleep\current\NoSleep.exe,,
+startup_apps,Clear cache,{repo}\clear-cache\start-clear-cache.ps1,,
+startup_apps,Docker Compose,{repo}\docker\start-docker.ps1,,
+startup_apps,MongoDB Compass,~\scoop\apps\mongodb-compass\current\MongoDBCompass.exe,,
+startup_apps,Git refresh and build,{repo}\github\start-git-update-build.ps1,,
+github_users,Akash-Mittal,,,
+github_config,clone_missing_on_startup,true,,
+github_config,build_on_startup,true,,
+notepad_config,notepad_exe,~\scoop\apps\notepadplusplus\current\notepad++.exe,,
+notepad_config,file_extensions,.txt .log .cfg .conf .ini .env .properties .toml .yaml .yml .json .jsonc .xml .xsd .csv .tsv .md .rst .adoc .nfo .html .htm .xhtml .css .scss .sass .less .js .mjs .cjs .jsx .ts .tsx .vue .svelte .py .java .kt .kts .groovy .scala .c .h .cpp .hpp .cc .hh .cs .fs .vb .go .rs .swift .m .mm .rb .php .pl .lua .dart .nim .zig .sh .bash .zsh .fish .ps1 .psm1 .psd1 .bat .cmd .pub .sql .graphql .gql .dockerfile .dockerignore .gitignore .gitattributes .gitmodules .tf .tfvars .hcl .yaml.tmpl .yml.tmpl .gradle .pom .sbt .makefile .mk .cmake .cmake.in .npmrc .yarnrc .pnpmfile .editorconfig .prettierrc .eslintrc .stylelintrc .babelrc .vimrc .zshrc .bashrc .profile,,
+notepad_config,open_file,G:\Other computers\My Laptop\Google-Drive\DOCUMENTS\Online\DAP.txt,,
+notepad_config,open_file,G:\Other computers\My Laptop\Google-Drive\DOCUMENTS\Online\time-line.txt,,
+chrome_config,chrome_exe,,,
+chrome_config,delay_ms,150,,
+chrome_config,startup_profiles,personal work finance,,
+chrome_config,personal.profile_directory,personal,,
+chrome_config,personal.url,https://calendar.google.com/calendar/u/0/r,,
+chrome_config,personal.url,https://mail.google.com/mail/u/0/#inbox,,
+chrome_config,personal.url,https://mail.google.com/mail/u/1/#inbox,,
+chrome_config,personal.url,https://translate.google.com/?sl=es&tl=en&op=translate,,
+chrome_config,personal.url,https://www.google.com/maps,,
+chrome_config,personal.url,https://www.idealista.com/en/usuario/tus-alertas,,
+chrome_config,work.profile_directory,work,,
+chrome_config,work.url,https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/~mittala/overview,,
+chrome_config,work.url,https://confluence.atlassian.mediamarktsaturn.com/wiki/spaces/XCPCP/calendars,,
+chrome_config,work.url,https://jira.atlassian.mediamarktsaturn.com/jira/software/c/projects/XCP/boards/2698?useStoredSettings=true,,
+chrome_config,work.url,https://console.cloud.google.com/run/overview?project=mms-xcp-xcp-p,,
+chrome_config,work.url,https://github.com/MediaMarktSaturn/xcp-posting,,
+chrome_config,work.url,https://cloud.mongodb.com/v2/632db29faf84ef7bf684e4ab#/clusters,,
+chrome_config,work.url,https://xcp-prod-frontend-swzlilrgcq-ez.a.run.app/,,
+chrome_config,nica.profile_directory,personal,,
+chrome_config,nica.url,https://nicaindia.wordpress.com/,,
+chrome_config,blog.profile_directory,personal,,
+chrome_config,blog.url,https://my.bluehost.in/hosting/app?lil=1#/,,
+chrome_config,blog.url,https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/filemanager/index.html,,
+chrome_config,blog.url,https://cpanel-sh117.webhostingservices.com/cpsess6564980317/frontend/jupiter/index.html,,
+chrome_config,blog.url,https://wordpress.com/sites/brainprintout.wordpress.com,,
+chrome_config,blog.url,https://brainprintout.wordpress.com/,,
+chrome_config,blog.url,https://nicaindia.wordpress.com/,,
+chrome_config,finance.profile_directory,personal,,
+chrome_config,finance.url,https://netbanking.hdfcbank.com/netbanking/,,
+chrome_config,finance.url,https://retailnetbanking.icici.bank.in/login-page,,
+chrome_config,finance.url,https://kunden.commerzbank.de/startpage/startpage,,
+chrome_config,finance.url,https://meine.deutsche-bank.de/#/banking/financial-overview,,
+chrome_config,finance.url,https://particulares.bancosantander.es/oneweb/global-position,,
+chrome_config,finance.url,https://app.n26.com/feed,,
+chrome_config,finance.url,https://app.revolut.com/home,,

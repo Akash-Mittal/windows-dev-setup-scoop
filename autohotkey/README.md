@@ -1,32 +1,21 @@
-# AutoHotkey Scripts
+# AutoHotkey: VPN login
 
-This folder contains AutoHotkey scripts for automating various tasks.
+`vpn-login.ahk` logs into the Cisco Secure Client VPN. It runs at login (`startup_apps`, "VPN login")
+with the AutoHotkey v2 executable from `startup_settings,autohotkey_exe`.
 
-## VPN Login (`start-vpn-login.ahk`)
+## Prerequisites
 
-The `start-vpn-login.ahk` script automates the process of logging into the Cisco Secure Client VPN.
+* AutoHotkey v2 (installed by `setup.ps1` through Scoop).
+* Cisco Secure Client in its default location (`C:\Program Files (x86)\Cisco\Cisco Secure Client`).
+* A user environment variable `WINDOWS_PASSWORD` holding the password to type. The password is never stored in this repo.
 
-### Prerequisites
+> **Security warning:** an environment variable is readable by any program running as you. Use this at your own discretion.
 
-*   [AutoHotkey v2.0](https://www.autohotkey.com/) must be installed.
-*   The Cisco Secure Client must be installed in its default location (`C:\Program Files (x86)\Cisco\Cisco Secure Client`).
-*   An environment variable named `MITTALA_WINDOWS_PASSWORD` must be set to your Windows password.
+## What it does
 
-> **Security Warning:** Storing your password in an environment variable can be a security risk. Ensure your system is secure and use this feature at your own discretion.
+1. Reads the password from `WINDOWS_PASSWORD` (does nothing if it is empty).
+2. Closes any running Cisco Secure Client, then starts it.
+3. Waits for the password window and enters the password.
+4. Waits for the "Accept" window and accepts.
 
-### Usage
-
-1.  Make sure the prerequisites are met.
-2.  Run the `start-vpn-login.ahk` script by double-clicking the file.
-3.  The script will automatically attempt to log in to the VPN 5 seconds after it starts.
-4.  You can also trigger the login manually by pressing `Ctrl+Alt+C`.
-
-### How it Works
-
-The script performs the following actions:
-
-1.  Retrieves your password from the `MITTALA_WINDOWS_PASSWORD` environment variable.
-2.  Closes any existing instances of the Cisco Secure Client.
-3.  Launches the Cisco Secure Client.
-4.  Waits for the password window to appear and enters your password.
-5.  Waits for the "Accept" window to appear and clicks "Accept".
+Trigger it again any time with `Ctrl+Alt+C`.

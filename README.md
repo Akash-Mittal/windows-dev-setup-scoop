@@ -1,63 +1,119 @@
-# Windows Dev Setup
+# Windows Dev Setup — MVP1
 
-This repository contains a collection of scripts and configuration files to automate the setup of a development environment on Windows.
+Sets up a Windows development machine from one CSV file, then starts your daily apps silently at every login.
 
-## Overview
+Two jobs, kept separate:
 
-The repository is organized into folders, each containing scripts or configuration files for a specific tool or purpose. The `fire.sh` script at the root of the repository is the main script that orchestrates the setup process.
+| | Script | When |
+|---|---|---|
+| **Setup** | `setup.ps1` | New machine, or after adding software. Installs everything, safe to re-run. |
+| **Startup** | `startup.ps1` | Every login, automatically and silently. Starts apps, refreshes and builds repos. |
 
-## `fire.sh`
+Everything is PowerShell (Windows PowerShell 5.1, built into Windows), so a fresh machine needs nothing pre-installed.
 
-The `fire.sh` script (Bash, run from Git Bash) is the main entry point for setting up the development environment. It performs the following tasks:
+## One folder for everything
 
-*   Changes the working directory to the script's location so relative paths and Git commands work.
-*   Reads `windows_dev_setup.csv` and, if `installonstartup` in the `install-configs` worksheet is `true` (the default when the file or row is missing), runs `scoop/start-scoop-windows-setup.ps1`.
-*   Configures Git with `core.longpaths true` globally and locally, then runs `composer update` and installs the Laravel installer.
-*   Starts the startup items (missing ones are skipped with a warning): AutoHotkey VPN login, Docker Desktop, Chrome profiles, Rainmeter, IntelliJ IDEA Ultimate, Notepad++ and its default files, NoSleep, clear cache, Docker Compose, MongoDB Compass, Scoop update, and `github/start-git-update-build.sh`.
+`general,root_dir` in the CSV picks the drive or folder (e.g. `D:`). If it doesn't exist, your user folder `~` is used.
+Everything lives in `<root_dir>\windows-dev-setup` (the workspace), which is this repo:
 
-### `windows_dev_setup.csv`
-
-A flat CSV whose `worksheet` column groups settings, so it can hold several "sheets" in one file:
-
-```csv
-worksheet,config,value
-install-configs,installonstartup,true
+```
+D:\windows-dev-setup                      this repo
+D:\windows-dev-setup\chrome
+D:\windows-dev-setup\rainmeter\trump-skins
+D:\windows-dev-setup\github\Akash-Mittal\repo1     cloned repos, one folder per GitHub user
+D:\windows-dev-setup\github\Another-User\repo1
 ```
 
-Set `value` to `false` to skip the Scoop install step.
+Without a D: drive the same tree is created under `~\windows-dev-setup`.
 
-### How to run
+## New machine
 
-1.  **From Git Bash**, in the repository root:
-    ```bash
-    ./fire.sh                       # uses windows_dev_setup.csv next to the script
-    ./fire.sh path/to/other.csv     # optional: a different config file
-    ```
+From a normal (not administrator) PowerShell window:
 
-2.  **Using a Batch File (e.g., for Startup)**:
-    ```batch
-    @echo off
-    "C:\Program Files\Git\bin\bash.exe" -l "C:\Users\Lenovo\github\personal\windows-dev-setup-scoop\fire.sh"
-    ```
+```powershell
+irm https://raw.githubusercontent.com/Akash-Mittal/windows-dev-setup-scoop/main/bootstrap.ps1 | iex
+```
 
-**Note on Execution Policy:** `fire.sh` launches the PowerShell scripts with `-ExecutionPolicy Bypass`, so no policy change is needed for them.
+`bootstrap.ps1` installs Scoop and git, reads `root_dir` from the CSV on GitHub, clones this repo into
+`<root_dir>\windows-dev-setup`, and runs `setup.ps1`. (Set `$env:DEV_SETUP_DIR` first to clone somewhere else.)
 
-## Folders
+## Existing machine
 
-*   [**autohotkey**](./autohotkey/README.md): Contains an AutoHotkey script to automate logging into the Cisco Secure Client VPN.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File setup.ps1            # install what's missing, register startup
+powershell -NoProfile -ExecutionPolicy Bypass -File setup.ps1 -DryRun    # show what it would do
+powershell -NoProfile -ExecutionPolicy Bypass -File startup.ps1 -DryRun -ShowSummary   # preview the login run
+```
 
-*   [**chrome**](./chrome/README.md): Contains batch scripts for launching Google Chrome with different user profiles and a predefined set of tabs.
+## What `setup.ps1` does
 
-*   [**clear-cache**](./clear-cache/README.md): Contains a PowerShell script to clear temporary files from your system.
+1. Installs Scoop, then git, the buckets and packages (`scoop_buckets`, `scoop_packages`).
+2. Installs winget packages (`winget_packages`).
+3. Runs one-off commands such as pip, composer and Android SDK installs (`post_install`).
+4. Runs one-off scripts: Notepad++ file associations, Rainmeter skins, GitHub checkout (`setup_scripts`).
+5. Registers `startup.ps1` to run at login with no window: a scheduled task named
+   `windows-dev-setup-startup`, or a shortcut in the Startup folder if a task can't be created.
 
-*   [**docker**](./docker/README.md): Contains Docker Compose files and scripts to set up a local development environment with MongoDB and ActiveMQ.
+It never prompts, and skips anything already installed. Log: `logs\setup-*.log`.
 
-*   [**github**](./github/README.md): Contains a PowerShell script to automate the process of updating a Git repository and building the project with Maven.
+## What `startup.ps1` does
 
-*   [**intellij**](./intellij/README.md): Contains IntelliJ IDEA configuration files, including code style, inspection profiles, and Detekt settings.
+1. Waits `start_delay_seconds`, then starts every enabled `startup_apps` row in order.
+   Missing apps are logged and skipped, never fatal.
+2. Runs `scoop\start-scoop-update.ps1` every `scoop_update_every_days` days.
+3. Writes `logs\startup-*.log`; output of each script goes to `logs\items\<name>.log`.
+4. Optionally shows a summary that closes itself (`show_summary`, `summary_timeout_seconds`).
 
-*   [**notepad**](./notepad/README.md): Contains a PowerShell script to set Notepad++ as the default application for various file extensions.
+## Configuration: `windows_dev_setup.csv`
 
-*   [**rainmeter**](./rainmeter/README.md): Contains skins for the Rainmeter desktop customization tool, including clocks and a reminder.
+One flat CSV; the `worksheet` column groups rows into "sheets".
 
-*   [**scoop**](./scoop/README.md): Contains a PowerShell script to install a wide range of development tools and applications using Scoop and winget.
+```csv
+worksheet,config,value,args,enabled
+startup_apps,IntelliJ IDEA,~\scoop\apps\idea\current\IDE\bin\idea64.exe,,
+scoop_packages,libreoffice,,,false
+```
+
+* `args` and `enabled` are optional. `enabled` = `false` turns a row off.
+* Paths may use `~` (your user folder), `{repo}` (this repo), `{workspace}` (`<root_dir>\windows-dev-setup`) and `%ENV_VARS%`.
+
+| Worksheet | config | value | args |
+|---|---|---|---|
+| `setup_settings` | `register_startup` | `true` / `false` | |
+| `startup_settings` | `start_delay_seconds`, `show_summary`, `summary_timeout_seconds`, `scoop_update_every_days`, `autohotkey_exe` | setting | |
+| `scoop_buckets` | bucket name | optional bucket URL | |
+| `scoop_packages` | package name | | |
+| `winget_packages` | package id | source (`winget`, `msstore`) | |
+| `post_install` | label | PowerShell command | |
+| `setup_scripts` | label | script path | arguments |
+| `startup_apps` | label | `.exe`, `.ps1` or `.ahk` path | arguments |
+| `github_config` | see [github](./github/README.md) | | |
+| `general` | `root_dir`, `project_dir_name` | e.g. `D:`, `windows-dev-setup` | |
+| `github_users` | GitHub user name | | |
+| `github_builds` | `<user>/<repo>` | build command | |
+| `notepad_config` | `notepad_exe`, `file_extensions`, `open_file` | | |
+| `chrome_config` | see [chrome](./chrome/README.md) | | |
+
+### Per-machine overrides
+
+Copy `windows_dev_setup.local.example.csv` to `windows_dev_setup.local.csv` (gitignored).
+A worksheet+config pair listed there replaces every row with that pair in the main CSV,
+e.g. a different `root_dir`, or `enabled` = `false` for an app you don't want on this machine.
+
+## Layout
+
+| Path | Purpose |
+|---|---|
+| `bootstrap.ps1`, `setup.ps1`, `startup.ps1` | Entry points |
+| `lib\common.ps1` | Shared helpers: CSV config, logging, launching |
+| [autohotkey](./autohotkey/README.md) | Cisco VPN auto-login |
+| [chrome](./chrome/README.md) | Chrome windows per profile |
+| [clear-cache](./clear-cache/README.md) | Clears temp and Chrome caches |
+| [docker](./docker/README.md) | MongoDB + ActiveMQ via Docker Compose |
+| [github](./github/README.md) | Clone your repos; keep them fresh and built |
+| [intellij](./intellij/README.md) | IntelliJ settings to import by hand |
+| [notepad](./notepad/README.md) | Notepad++ associations and files to open |
+| [rainmeter](./rainmeter/README.md) | Desktop skins |
+| [scoop](./scoop/README.md) | Scoop update |
+
+Gitignored: cloned repos (`github\<user>\`), `logs\`, `.state\`, `windows_dev_setup.local.csv`.

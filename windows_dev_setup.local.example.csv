@@ -1,0 +1,7 @@
+worksheet,config,value,args,enabled
+# Copy this file to windows_dev_setup.local.csv (gitignored) for settings that only apply to one machine.
+# A worksheet+config pair listed here replaces every row with that pair in windows_dev_setup.csv.
+# Rows starting with # are ignored.
+general,root_dir,E:,,
+startup_settings,show_summary,true,,
+startup_apps,Docker Compose,{repo}\docker\start-docker.ps1,,false
