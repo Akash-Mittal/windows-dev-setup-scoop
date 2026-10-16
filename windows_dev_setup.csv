@@ -65,6 +65,9 @@ winget_packages,Google.GoogleDrive,winget,,
 winget_packages,9NKSQGP7F2NH,msstore,,
 winget_packages,SpanishGovernment.Autofirma,winget,,
 winget_packages,Docker.DockerDesktop,winget,,false
+zip_installs,Balabolka,https://www.cross-plus-a.com/balabolka_portable.zip,{workspace}\tools\balabolka,true
+zip_installs,balcon,https://www.cross-plus-a.com/balcon.zip,{workspace}\tools\balcon,true
+user_path,balcon,{workspace}\tools\balcon,,true
 post_install,Git long paths,git config --global core.longpaths true,,
 post_install,pywhatkit,python -m pip install --upgrade pywhatkit,,
 post_install,Laravel installer,composer global require laravel/installer,,
@@ -73,17 +76,17 @@ post_install,Android SDK packages,sdkmanager 'platform-tools' 'platforms;android
 setup_scripts,Notepad++ file associations,{repo}\notepad\set-default-file-extensions.ps1,,
 setup_scripts,Rainmeter skins,{repo}\rainmeter\copy.skins.ps1,,
 setup_scripts,GitHub checkout,{repo}\github\github-checkout.ps1,,
-startup_apps,VPN login,{repo}\autohotkey\vpn-login.ahk,,
-startup_apps,Docker Desktop,C:\Program Files\Docker\Docker\Docker Desktop.exe,,
-startup_apps,Chrome,{repo}\chrome\start-chrome.ps1,,
-startup_apps,Rainmeter,~\scoop\apps\rainmeter\current\Rainmeter.exe,,
-startup_apps,IntelliJ IDEA,~\scoop\apps\idea\current\IDE\bin\idea64.exe,,
-startup_apps,Notepad++ files,{repo}\notepad\start-open-default-text-files.ps1,,
-startup_apps,NoSleep,~\scoop\apps\nosleep\current\NoSleep.exe,,
-startup_apps,Clear cache,{repo}\clear-cache\start-clear-cache.ps1,,
-startup_apps,Docker Compose,{repo}\docker\start-docker.ps1,,
-startup_apps,MongoDB Compass,~\scoop\apps\mongodb-compass\current\MongoDBCompass.exe,,
-startup_apps,Git refresh and build,{repo}\github\start-git-update-build.ps1,,
+startup_apps,VPN login,{repo}\autohotkey\vpn-login.ahk,,false
+startup_apps,Docker Desktop,C:\Program Files\Docker\Docker\Docker Desktop.exe,,false
+startup_apps,Chrome,{repo}\chrome\start-chrome.ps1,,true
+startup_apps,Rainmeter,~\scoop\apps\rainmeter\current\Rainmeter.exe,,true
+startup_apps,IntelliJ IDEA,~\scoop\apps\idea\current\IDE\bin\idea64.exe,,true
+startup_apps,Notepad++ files,{repo}\notepad\start-open-default-text-files.ps1,,true
+startup_apps,NoSleep,~\scoop\apps\nosleep\current\NoSleep.exe,,true
+startup_apps,Clear cache,{repo}\clear-cache\start-clear-cache.ps1,,true
+startup_apps,Docker Compose,{repo}\docker\start-docker.ps1,,false
+startup_apps,MongoDB Compass,~\scoop\apps\mongodb-compass\current\MongoDBCompass.exe,,true
+startup_apps,Git refresh and build,{repo}\github\start-git-update-build.ps1,,true
 github_users,Akash-Mittal,,,
 github_config,clone_missing_on_startup,true,,
 github_config,build_on_startup,true,,

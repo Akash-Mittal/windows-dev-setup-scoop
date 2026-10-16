@@ -1,6 +1,7 @@
 # Sets up a machine from windows_dev_setup.csv. Safe to re-run: anything already in place is skipped.
 #   1. Scoop, git, scoop buckets and packages       (scoop_buckets, scoop_packages)
 #   2. winget packages                              (winget_packages)
+#   2b. zips from a vendor's own site, unpacked     (zip_installs, user_path)
 #   3. one-off commands                             (post_install)
 #   4. one-off scripts                              (setup_scripts)
 #   5. registers startup.ps1 to run at every login  (setup_settings, register_startup)
@@ -160,6 +161,77 @@ function Install-WingetPackage {
     }
 }
 
+# ---------------------------------------------------------------- zip installs
+
+# Downloads a zip over HTTPS and unpacks it into a folder. Skipped when the folder already has files.
+# For tools whose vendor site is the only trusted source (no scoop/winget package used).
+function Install-ZipPackage {
+    param([string]$Name, [string]$Url, [string]$TargetDir)
+
+    $label = "zip: $Name"
+    if (-not $Url.StartsWith("https://")) {
+        Add-Result $label "Failed" "refusing a non-HTTPS download url: $Url"
+        return
+    }
+    if (-not $TargetDir) {
+        Add-Result $label "Failed" "no target folder in the args column"
+        return
+    }
+    if ((Test-Path -LiteralPath $TargetDir) -and (Get-ChildItem -LiteralPath $TargetDir -Force | Select-Object -First 1)) {
+        Add-Result $label "Present" $TargetDir
+        return
+    }
+    if ($DryRun) {
+        Add-Result $label "DryRun" "would download $Url to $TargetDir"
+        return
+    }
+
+    $zip = Join-Path $env:TEMP ("dev-setup-" + (ConvertTo-SafeFileName $Name) + ".zip")
+    try {
+        Write-Log "Downloading $Url ..."
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $ProgressPreference = "SilentlyContinue"   # the progress bar makes Invoke-WebRequest very slow in 5.1
+        Invoke-WebRequest -Uri $Url -OutFile $zip -UseBasicParsing -ErrorAction Stop
+
+        New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
+        Expand-Archive -LiteralPath $zip -DestinationPath $TargetDir -Force -ErrorAction Stop
+
+        # A zip holding a single top-level folder is flattened, so the tools sit directly in $TargetDir.
+        $top = @(Get-ChildItem -LiteralPath $TargetDir -Force)
+        if ($top.Count -eq 1 -and $top[0].PSIsContainer) {
+            Get-ChildItem -LiteralPath $top[0].FullName -Force | Move-Item -Destination $TargetDir
+            Remove-Item -LiteralPath $top[0].FullName -Force
+        }
+        # Files downloaded from the internet carry a "blocked" mark; clear it so the tools run without warnings.
+        Get-ChildItem -LiteralPath $TargetDir -Recurse -File | Unblock-File
+        Add-Result $label "Installed" $TargetDir
+    } catch {
+        Add-Result $label "Failed" "$($_.Exception.Message)"
+    } finally {
+        Remove-Item -LiteralPath $zip -Force -ErrorAction SilentlyContinue
+    }
+}
+
+# Adds a folder to the user PATH (persisted) so its tools work from any terminal.
+function Add-UserPath {
+    param([string]$Name, [string]$Folder)
+
+    $label = "PATH: $Name"
+    $user = [Environment]::GetEnvironmentVariable("PATH", "User")
+    if (($user -split ";") -contains $Folder) {
+        Add-Result $label "Present" $Folder
+        return
+    }
+    if ($DryRun) {
+        Add-Result $label "DryRun" "would add $Folder"
+        return
+    }
+
+    [Environment]::SetEnvironmentVariable("PATH", ((@($user -split ";" | Where-Object { $_ }) + $Folder) -join ";"), "User")
+    $env:PATH = "$env:PATH;$Folder"
+    Add-Result $label "Ok" $Folder
+}
+
 # ---------------------------------------------------------------- commands and scripts
 
 function Invoke-PostInstall {
@@ -291,6 +363,14 @@ if ($haveScoop) {
 
 foreach ($row in Get-ConfigRows "winget_packages") {
     Install-WingetPackage $row.Config $row.Value
+}
+
+foreach ($row in Get-ConfigRows "zip_installs") {
+    Install-ZipPackage $row.Config $row.Value (Expand-ConfigPath $row.Args)
+}
+
+foreach ($row in Get-ConfigRows "user_path") {
+    Add-UserPath $row.Config (Expand-ConfigPath $row.Value)
 }
 
 foreach ($row in Get-ConfigRows "post_install") {

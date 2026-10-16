@@ -1,4 +1,4 @@
-# Windows Dev Setup — MVP1
+ba# Windows Dev Setup — MVP1
 
 Sets up a Windows development machine from one CSV file, then starts your daily apps silently at every login.
 
@@ -48,7 +48,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File startup.ps1 -DryRun -ShowSum
 ## What `setup.ps1` does
 
 1. Installs Scoop, then git, the buckets and packages (`scoop_buckets`, `scoop_packages`).
-2. Installs winget packages (`winget_packages`).
+2. Installs winget packages (`winget_packages`), and tools that come only from their vendor's site
+   as a zip (`zip_installs`), e.g. Balabolka and its command-line `balcon` from cross-plus-a.com,
+   unpacked to `<workspace>\tools\`. `user_path` puts `balcon` on your PATH.
 3. Runs one-off commands such as pip, composer and Android SDK installs (`post_install`).
 4. Runs one-off scripts: Notepad++ file associations, Rainmeter skins, GitHub checkout (`setup_scripts`).
 5. Registers `startup.ps1` to run at login with no window: a scheduled task named
@@ -84,6 +86,8 @@ scoop_packages,libreoffice,,,false
 | `scoop_buckets` | bucket name | optional bucket URL | |
 | `scoop_packages` | package name | | |
 | `winget_packages` | package id | source (`winget`, `msstore`) | |
+| `zip_installs` | name | HTTPS zip URL from the vendor's own site | folder to unpack into |
+| `user_path` | label | folder to add to your user PATH | |
 | `post_install` | label | PowerShell command | |
 | `setup_scripts` | label | script path | arguments |
 | `startup_apps` | label | `.exe`, `.ps1` or `.ahk` path | arguments |
