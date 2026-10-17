@@ -25,9 +25,13 @@ function Get-GitHubRepos {
         & gh auth status *> $null
         if ($LASTEXITCODE -eq 0) {
             $json = & gh repo list $User --limit 1000 --json "name,url"
-            return @($json | Out-String | ConvertFrom-Json | ForEach-Object {
-                [pscustomobject]@{ Name = $_.name; Url = "$($_.url).git" }
-            })
+            # Windows PowerShell 5.1 emits a parsed JSON array as ONE object, so loop over it explicitly.
+            $parsed = $json | Out-String | ConvertFrom-Json
+            $repos = @()
+            foreach ($item in $parsed) {
+                $repos += [pscustomobject]@{ Name = $item.name; Url = "$($item.url).git" }
+            }
+            return $repos
         }
     }
 
@@ -37,9 +41,13 @@ function Get-GitHubRepos {
     $repos = @()
     $page = 1
     while ($true) {
-        $response = @(Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/users/$User/repos?per_page=100&page=$page")
-        if ($response.Count -eq 0) { break }
-        $repos += $response | ForEach-Object { [pscustomobject]@{ Name = $_.name; Url = $_.clone_url } }
+        $response = Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/users/$User/repos?per_page=100&page=$page"
+        $pageRepos = @()
+        foreach ($item in $response) {
+            if ($item.name) { $pageRepos += [pscustomobject]@{ Name = $item.name; Url = $item.clone_url } }
+        }
+        if ($pageRepos.Count -eq 0) { break }
+        $repos += $pageRepos
         $page++
     }
     $repos

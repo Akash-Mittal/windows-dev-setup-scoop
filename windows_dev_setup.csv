@@ -79,15 +79,16 @@ setup_scripts,GitHub checkout,{repo}\github\github-checkout.ps1,,
 startup_apps,VPN login,{repo}\autohotkey\vpn-login.ahk,,false
 startup_apps,Docker Desktop,C:\Program Files\Docker\Docker\Docker Desktop.exe,,false
 startup_apps,Chrome,{repo}\chrome\start-chrome.ps1,,true
-startup_apps,Rainmeter,~\scoop\apps\rainmeter\current\Rainmeter.exe,,true
+startup_apps,Rainmeter,~\scoop\apps\rainmeter\current\Rainmeter.exe,,false
 startup_apps,IntelliJ IDEA,~\scoop\apps\idea\current\IDE\bin\idea64.exe,,true
 startup_apps,Notepad++ files,{repo}\notepad\start-open-default-text-files.ps1,,true
 startup_apps,NoSleep,~\scoop\apps\nosleep\current\NoSleep.exe,,true
-startup_apps,Clear cache,{repo}\clear-cache\start-clear-cache.ps1,,true
+startup_apps,Clear cache,{repo}\clear-cache\start-clear-cache.ps1,,false
 startup_apps,Docker Compose,{repo}\docker\start-docker.ps1,,false
-startup_apps,MongoDB Compass,~\scoop\apps\mongodb-compass\current\MongoDBCompass.exe,,true
+startup_apps,MongoDB Compass,~\scoop\apps\mongodb-compass\current\MongoDBCompass.exe,,false
 startup_apps,Git refresh and build,{repo}\github\start-git-update-build.ps1,,true
 github_users,Akash-Mittal,,,
+github_users,betterliving-group,,,
 github_config,clone_missing_on_startup,true,,
 github_config,build_on_startup,true,,
 notepad_config,notepad_exe,~\scoop\apps\notepadplusplus\current\notepad++.exe,,
